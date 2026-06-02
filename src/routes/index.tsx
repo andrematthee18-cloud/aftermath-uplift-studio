@@ -163,7 +163,8 @@ function Home() {
         <div className="mx-auto grid max-w-7xl gap-16 md:grid-cols-12">
           <div className="md:col-span-5">
             <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-accent">— About</p>
-            <h2 className="text-4xl font-bold md:text-5xl">Built in the aftermath of comfortable software.</h2>
+            <Heading3D text="ABOUT" height={160} size={1.6} depth={0.45} emissive="#4cc9f0" />
+            <h2 className="sr-only">Built in the aftermath of comfortable software.</h2>
           </div>
           <div className="space-y-6 text-base leading-relaxed text-muted-foreground md:col-span-7 md:text-lg">
             <p>
