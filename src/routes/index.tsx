@@ -31,7 +31,7 @@ function Home() {
         <div className="absolute inset-0 opacity-90">
           <Logo3D />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background/40" />
       </div>
 
       {/* NAV */}
