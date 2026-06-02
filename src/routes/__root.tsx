@@ -82,6 +82,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "Aftermath Studio" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "Aftermath Studio" },
+      { name: "twitter:title", content: "Aftermath Studio" },
+      { property: "og:description", content: "South African app and game studio." },
+      { name: "twitter:description", content: "South African app and game studio." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/tfRlDqrI6rPSMTrj3Eee8pjdbte2/social-images/social-1780426587935-ChatGPT_Image_Jun_2,_2026,_08_20_16_PM.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/tfRlDqrI6rPSMTrj3Eee8pjdbte2/social-images/social-1780426587935-ChatGPT_Image_Jun_2,_2026,_08_20_16_PM.webp" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
