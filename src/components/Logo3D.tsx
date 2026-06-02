@@ -1,19 +1,16 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
+import { EffectComposer, Pixelation, Bloom, ChromaticAberration } from "@react-three/postprocessing";
 import { Suspense, useMemo, useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 
-/**
- * Gaming-themed morphing background.
- * As the user scrolls the page, the central object crossfades between
- * four iconic gaming forms:
- *   0. D20 die        (tabletop / RPG)
- *   1. Torus knot     (portal / loot ring)
- *   2. Wireframe skull-ish dodecahedron (survival / danger)
- *   3. Wireframe planet sphere (open world / Ubuntu: The Fall)
- *
- * The active form is driven by scroll progress (0..1) across the page.
- */
+const FORMS = 4;
+
+// Cubic ease for smoother weight curves
+const smooth = (x: number) => {
+  const t = Math.max(0, Math.min(1, x));
+  return t * t * (3 - 2 * t);
+};
 
 type FormProps = {
   scrollProgress: React.MutableRefObject<number>;
@@ -23,26 +20,28 @@ type FormProps = {
 
 function MorphSlot({ scrollProgress, index, children }: FormProps) {
   const ref = useRef<THREE.Group>(null);
-  const FORMS = 4;
 
   useFrame((state) => {
     if (!ref.current) return;
     const t = state.clock.getElapsedTime();
-    const p = scrollProgress.current * (FORMS - 1); // 0..3
+    const p = scrollProgress.current * (FORMS - 1);
     const dist = Math.abs(p - index);
-    // Smooth bell-curve weight per slot
-    const weight = Math.max(0, 1 - dist);
-    const eased = weight * weight * (3 - 2 * weight);
+    // wider, smoother bell so adjacent slots overlap longer
+    const weight = Math.max(0, 1 - dist * 0.9);
+    const eased = smooth(weight);
 
-    ref.current.scale.setScalar(eased * 1.6 + 0.001);
-    const mat = (ref.current.children[0] as THREE.Mesh)?.material as
-      | THREE.MeshStandardMaterial
-      | THREE.MeshBasicMaterial
-      | undefined;
-    if (mat && "opacity" in mat) {
-      mat.opacity = eased;
-      mat.transparent = true;
-    }
+    const scale = eased * 1.7 + 0.0001;
+    ref.current.scale.setScalar(scale);
+    ref.current.visible = eased > 0.01;
+
+    ref.current.traverse((obj) => {
+      const mesh = obj as THREE.Mesh;
+      const mat = mesh.material as THREE.Material | undefined;
+      if (mat && "opacity" in mat) {
+        (mat as THREE.MeshStandardMaterial).transparent = true;
+        (mat as THREE.MeshStandardMaterial).opacity = eased;
+      }
+    });
 
     ref.current.rotation.y = t * 0.3 + index * 1.7;
     ref.current.rotation.x = Math.sin(t * 0.4 + index) * 0.4;
@@ -55,7 +54,6 @@ function MorphSlot({ scrollProgress, index, children }: FormProps) {
 function ScrollMorph({ scrollProgress }: { scrollProgress: React.MutableRefObject<number> }) {
   return (
     <group>
-      {/* 0 — D20 die */}
       <MorphSlot scrollProgress={scrollProgress} index={0}>
         <mesh>
           <icosahedronGeometry args={[1.2, 0]} />
@@ -74,7 +72,6 @@ function ScrollMorph({ scrollProgress }: { scrollProgress: React.MutableRefObjec
         </mesh>
       </MorphSlot>
 
-      {/* 1 — Torus knot / portal */}
       <MorphSlot scrollProgress={scrollProgress} index={1}>
         <mesh>
           <torusKnotGeometry args={[0.9, 0.28, 180, 24, 2, 3]} />
@@ -88,7 +85,6 @@ function ScrollMorph({ scrollProgress }: { scrollProgress: React.MutableRefObjec
         </mesh>
       </MorphSlot>
 
-      {/* 2 — Dodecahedron (survival relic) */}
       <MorphSlot scrollProgress={scrollProgress} index={2}>
         <mesh>
           <dodecahedronGeometry args={[1.15, 0]} />
@@ -107,7 +103,6 @@ function ScrollMorph({ scrollProgress }: { scrollProgress: React.MutableRefObjec
         </mesh>
       </MorphSlot>
 
-      {/* 3 — Wireframe planet */}
       <MorphSlot scrollProgress={scrollProgress} index={3}>
         <mesh>
           <sphereGeometry args={[1.3, 32, 24]} />
@@ -180,6 +175,24 @@ function HudGrid({ scrollProgress }: { scrollProgress: React.MutableRefObject<nu
   );
 }
 
+/**
+ * Pixelation effect that surges during the transition between two forms
+ * (when scroll progress is between two integer slots) and relaxes when
+ * the camera is settled on a single form.
+ */
+function ScrollPixelation({ scrollProgress }: { scrollProgress: React.MutableRefObject<number> }) {
+  const [granularity, setGranularity] = useState(0);
+  useFrame(() => {
+    const p = scrollProgress.current * (FORMS - 1);
+    const frac = p - Math.floor(p);
+    // bell curve: 0 at integer slots, 1 mid-transition
+    const transition = 1 - Math.abs(frac - 0.5) * 2;
+    const target = transition * 14; // max pixelation strength
+    setGranularity((prev) => prev + (target - prev) * 0.12);
+  });
+  return <Pixelation granularity={granularity} />;
+}
+
 export function Logo3D() {
   const scrollProgress = useRef(0);
   const [mounted, setMounted] = useState(false);
@@ -216,6 +229,11 @@ export function Logo3D() {
         <Starfield scrollProgress={scrollProgress} />
         <HudGrid scrollProgress={scrollProgress} />
         <Environment preset="night" />
+        <EffectComposer>
+          <ScrollPixelation scrollProgress={scrollProgress} />
+          <Bloom intensity={0.35} luminanceThreshold={0.6} luminanceSmoothing={0.2} mipmapBlur />
+          <ChromaticAberration offset={[0.0008, 0.0012] as unknown as THREE.Vector2} radialModulation={false} modulationOffset={0} />
+        </EffectComposer>
       </Suspense>
     </Canvas>
   );
