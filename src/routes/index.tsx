@@ -194,7 +194,8 @@ function Home() {
           >
             <LogoMark className="mx-auto mb-8 h-16 w-16" />
             <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-accent">— Contact</p>
-            <h2 className="text-4xl font-bold md:text-6xl">Let's talk.</h2>
+            <Heading3D text="TALK" height={180} size={1.8} depth={0.5} emissive="#9b5de5" />
+            <h2 className="sr-only">Let's talk.</h2>
             <p className="mx-auto mt-6 max-w-md text-muted-foreground">
               Press, partnership, or just want to say hello? We read every email.
             </p>
