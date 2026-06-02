@@ -118,9 +118,8 @@ function Home() {
           >
             <div>
               <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-accent">— Our Slate</p>
-              <h2 className="max-w-2xl text-4xl font-bold md:text-6xl">
-                Three projects, one philosophy.
-              </h2>
+              <Heading3D text="SLATE" height={160} size={1.6} depth={0.45} emissive="#e85d3a" />
+              <h2 className="sr-only">Three projects, one philosophy.</h2>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
               Each release is shaped to outlast the moment it launches. No shortcuts, no filler.
