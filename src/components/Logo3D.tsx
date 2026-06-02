@@ -1,6 +1,6 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
-import { EffectComposer, Pixelation, Bloom, ChromaticAberration } from "@react-three/postprocessing";
+import { EffectComposer, Pixelation, Bloom } from "@react-three/postprocessing";
 import { Suspense, useMemo, useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 
@@ -231,8 +231,7 @@ export function Logo3D() {
         <Environment preset="night" />
         <EffectComposer>
           <ScrollPixelation scrollProgress={scrollProgress} />
-          <Bloom intensity={0.35} luminanceThreshold={0.6} luminanceSmoothing={0.2} mipmapBlur />
-          <ChromaticAberration offset={[0.0008, 0.0012] as unknown as THREE.Vector2} radialModulation={false} modulationOffset={0} />
+          <Bloom intensity={0.4} luminanceThreshold={0.55} luminanceSmoothing={0.2} mipmapBlur />
         </EffectComposer>
       </Suspense>
     </Canvas>
