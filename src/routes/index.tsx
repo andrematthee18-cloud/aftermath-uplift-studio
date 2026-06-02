@@ -24,6 +24,16 @@ export const Route = createFileRoute("/")({
 function Home() {
   return (
     <main className="relative min-h-screen bg-background text-foreground">
+      {/* Persistent 3D backdrop — visible behind every section for depth */}
+      <div className="pointer-events-none fixed inset-0 z-0">
+        <div className="absolute inset-0 grid-bg opacity-60" />
+        <div className="absolute inset-0 bg-radial" />
+        <div className="absolute inset-0 opacity-90">
+          <Logo3D />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background/80" />
+      </div>
+
       {/* NAV */}
       <header className="fixed inset-x-0 top-0 z-50 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
@@ -49,16 +59,9 @@ function Home() {
       </header>
 
       {/* HERO */}
-      <section id="top" className="relative min-h-screen overflow-hidden">
-        <div className="absolute inset-0 grid-bg" />
-        <div className="absolute inset-0 bg-radial" />
-
-        {/* 3D scene */}
-        <div className="absolute inset-0">
-          <Logo3D />
-        </div>
-
+      <section id="top" className="relative z-10 min-h-screen overflow-hidden">
         <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-end px-6 pb-24 pt-32">
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -103,7 +106,7 @@ function Home() {
       </section>
 
       {/* APPS */}
-      <section id="apps" className="relative px-6 py-32">
+      <section id="apps" className="relative z-10 bg-background/80 px-6 py-32 backdrop-blur-sm">
         <div className="mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -156,7 +159,7 @@ function Home() {
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="relative border-t border-border px-6 py-32">
+      <section id="about" className="relative z-10 border-t border-border bg-background/80 px-6 py-32 backdrop-blur-sm">
         <div className="mx-auto grid max-w-7xl gap-16 md:grid-cols-12">
           <div className="md:col-span-5">
             <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-accent">— About</p>
@@ -180,7 +183,7 @@ function Home() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="relative border-t border-border px-6 py-32">
+      <section id="contact" className="relative z-10 border-t border-border bg-background/70 px-6 py-32 backdrop-blur-sm">
         <div className="mx-auto max-w-4xl text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -207,7 +210,7 @@ function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-border px-6 py-10">
+      <footer className="relative z-10 border-t border-border bg-background/90 px-6 py-10 backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground">
           <div className="flex items-center gap-3">
             <LogoMark className="h-6 w-6" />
