@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Activity, Heart, Skull, Mail, ArrowUpRight, MapPin } from "lucide-react";
 import { Logo3D } from "@/components/Logo3D";
 import { LogoMark } from "@/components/LogoMark";
+import { Heading3D } from "@/components/Heading3D";
 import { AppCard } from "@/components/AppCard";
 
 export const Route = createFileRoute("/")({
