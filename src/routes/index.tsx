@@ -59,16 +59,9 @@ function Home() {
       </header>
 
       {/* HERO */}
-      <section id="top" className="relative min-h-screen overflow-hidden">
-        <div className="absolute inset-0 grid-bg" />
-        <div className="absolute inset-0 bg-radial" />
-
-        {/* 3D scene */}
-        <div className="absolute inset-0">
-          <Logo3D />
-        </div>
-
+      <section id="top" className="relative z-10 min-h-screen overflow-hidden">
         <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-end px-6 pb-24 pt-32">
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
