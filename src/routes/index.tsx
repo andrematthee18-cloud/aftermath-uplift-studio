@@ -31,7 +31,7 @@ function Home() {
         <div className="absolute inset-0 opacity-90">
           <Logo3D />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background/40" />
       </div>
 
       {/* NAV */}
@@ -106,7 +106,7 @@ function Home() {
       </section>
 
       {/* APPS */}
-      <section id="apps" className="relative z-10 bg-background/80 px-6 py-32 backdrop-blur-sm">
+      <section id="apps" className="relative z-10 px-6 py-32">
         <div className="mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -159,7 +159,7 @@ function Home() {
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="relative z-10 border-t border-border bg-background/80 px-6 py-32 backdrop-blur-sm">
+      <section id="about" className="relative z-10 border-t border-border px-6 py-32">
         <div className="mx-auto grid max-w-7xl gap-16 md:grid-cols-12">
           <div className="md:col-span-5">
             <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-accent">— About</p>
@@ -183,7 +183,7 @@ function Home() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="relative z-10 border-t border-border bg-background/70 px-6 py-32 backdrop-blur-sm">
+      <section id="contact" className="relative z-10 border-t border-border px-6 py-32">
         <div className="mx-auto max-w-4xl text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -210,7 +210,7 @@ function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="relative z-10 border-t border-border bg-background/90 px-6 py-10 backdrop-blur-sm">
+      <footer className="relative z-10 border-t border-border bg-background/40 px-6 py-10 backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground">
           <div className="flex items-center gap-3">
             <LogoMark className="h-6 w-6" />
