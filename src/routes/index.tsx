@@ -24,6 +24,16 @@ export const Route = createFileRoute("/")({
 function Home() {
   return (
     <main className="relative min-h-screen bg-background text-foreground">
+      {/* Persistent 3D backdrop — visible behind every section for depth */}
+      <div className="pointer-events-none fixed inset-0 z-0">
+        <div className="absolute inset-0 grid-bg opacity-60" />
+        <div className="absolute inset-0 bg-radial" />
+        <div className="absolute inset-0 opacity-90">
+          <Logo3D />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background/80" />
+      </div>
+
       {/* NAV */}
       <header className="fixed inset-x-0 top-0 z-50 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
