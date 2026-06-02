@@ -90,7 +90,8 @@ function Home() {
                 href="mailto:contact@aftermathstudio.co.za"
                 className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent hover:text-accent"
               >
-                <Mail className="h-4 w-4" /> contact@aftermathstudio.co.za
+                <Mail className="h-4 w-4" />
+                <span>contact@aftermathstudio.co.za</span>
               </a>
             </div>
           </motion.div>
