@@ -1,0 +1,15 @@
+name = "aftermath-uplift-studio"
+main = ".output/server/index.mjs"
+compatibility_date = "2025-05-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = ".output/public"
+binding = "ASSETS"
+
+# Set runtime env vars / secrets with:
+#   wrangler secret put SUPABASE_SERVICE_ROLE_KEY
+# Public values can be set in [vars] below.
+[vars]
+# VITE_SUPABASE_URL = "https://your-project.supabase.co"
+# VITE_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_..."
