@@ -50,7 +50,7 @@ function Home() {
           <nav className="hidden gap-8 text-sm text-muted-foreground md:flex">
             <a href="#apps" className="transition-colors hover:text-foreground">Apps</a>
             <a href="#about" className="transition-colors hover:text-foreground">About</a>
-            <a href="#contact" className="transition-colors hover:text-foreground">Contact</a>
+            <button onClick={() => setContactOpen(true)} className="transition-colors hover:text-foreground">Contact</button>
           </nav>
           <a
             href="mailto:contact@aftermathstudio.co.za"
