@@ -52,12 +52,12 @@ function Home() {
             <a href="#about" className="transition-colors hover:text-foreground">About</a>
             <button onClick={() => setContactOpen(true)} className="transition-colors hover:text-foreground">Contact</button>
           </nav>
-          <a
-            href="mailto:contact@aftermathstudio.co.za"
+          <button
+            onClick={() => setContactOpen(true)}
             className="hidden items-center gap-2 rounded-full border border-border bg-secondary px-4 py-2 text-xs font-medium text-foreground transition-colors hover:border-accent hover:text-accent md:inline-flex"
           >
             Get in touch <ArrowUpRight className="h-3 w-3" />
-          </a>
+          </button>
         </div>
       </header>
 
