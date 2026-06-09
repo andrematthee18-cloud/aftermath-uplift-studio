@@ -204,14 +204,14 @@ function Home() {
             <p className="mx-auto mt-6 max-w-md text-muted-foreground">
               Press, partnership, or just want to say hello? We read every email.
             </p>
-            <a
-              href="mailto:contact@aftermathstudio.co.za"
+            <button
+              onClick={() => setContactOpen(true)}
               className="group mt-10 inline-flex items-center gap-3 rounded-full border border-border bg-card px-8 py-4 text-lg font-medium text-foreground transition-all hover:border-accent hover:bg-accent hover:text-accent-foreground hover:shadow-[0_0_60px_-10px_oklch(0.7_0.18_35/0.6)]"
             >
               <Mail className="h-5 w-5" />
-              contact@aftermathstudio.co.za
+              Open contact form
               <ArrowUpRight className="h-5 w-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </a>
+            </button>
           </motion.div>
         </div>
       </section>
