@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Activity, Heart, Skull, Mail, ArrowUpRight, MapPin } from "lucide-react";
 import { Logo3D } from "@/components/Logo3D";
 import { LogoMark } from "@/components/LogoMark";
 import { AppCard } from "@/components/AppCard";
+import { ContactForm } from "@/components/ContactForm";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -22,6 +24,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const [contactOpen, setContactOpen] = useState(false);
   return (
     <main className="relative min-h-screen bg-background text-foreground">
       {/* Persistent 3D backdrop — visible behind every section for depth */}
@@ -47,14 +50,14 @@ function Home() {
           <nav className="hidden gap-8 text-sm text-muted-foreground md:flex">
             <a href="#apps" className="transition-colors hover:text-foreground">Apps</a>
             <a href="#about" className="transition-colors hover:text-foreground">About</a>
-            <a href="#contact" className="transition-colors hover:text-foreground">Contact</a>
+            <button onClick={() => setContactOpen(true)} className="transition-colors hover:text-foreground">Contact</button>
           </nav>
-          <a
-            href="mailto:contact@aftermathstudio.co.za"
+          <button
+            onClick={() => setContactOpen(true)}
             className="hidden items-center gap-2 rounded-full border border-border bg-secondary px-4 py-2 text-xs font-medium text-foreground transition-colors hover:border-accent hover:text-accent md:inline-flex"
           >
             Get in touch <ArrowUpRight className="h-3 w-3" />
-          </a>
+          </button>
         </div>
       </header>
 
@@ -89,13 +92,13 @@ function Home() {
                 See what we're building
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </a>
-              <a
-                href="mailto:contact@aftermathstudio.co.za"
+              <button
+                onClick={() => setContactOpen(true)}
                 className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent hover:text-accent"
               >
                 <Mail className="h-4 w-4" />
-                <span>contact@aftermathstudio.co.za</span>
-              </a>
+                <span>Get in touch</span>
+              </button>
             </div>
           </motion.div>
         </div>
@@ -201,14 +204,14 @@ function Home() {
             <p className="mx-auto mt-6 max-w-md text-muted-foreground">
               Press, partnership, or just want to say hello? We read every email.
             </p>
-            <a
-              href="mailto:contact@aftermathstudio.co.za"
+            <button
+              onClick={() => setContactOpen(true)}
               className="group mt-10 inline-flex items-center gap-3 rounded-full border border-border bg-card px-8 py-4 text-lg font-medium text-foreground transition-all hover:border-accent hover:bg-accent hover:text-accent-foreground hover:shadow-[0_0_60px_-10px_oklch(0.7_0.18_35/0.6)]"
             >
               <Mail className="h-5 w-5" />
-              contact@aftermathstudio.co.za
+              Open contact form
               <ArrowUpRight className="h-5 w-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </a>
+            </button>
           </motion.div>
         </div>
       </section>
@@ -223,6 +226,8 @@ function Home() {
           <span className="font-mono uppercase tracking-[0.25em]">Made in South Africa 🇿🇦</span>
         </div>
       </footer>
+
+      <ContactForm open={contactOpen} onOpenChange={setContactOpen} />
     </main>
   );
 }
