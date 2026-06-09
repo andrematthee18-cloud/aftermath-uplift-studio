@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Activity, Heart, Skull, Mail, ArrowUpRight, MapPin } from "lucide-react";
 import { Logo3D } from "@/components/Logo3D";
 import { LogoMark } from "@/components/LogoMark";
 import { AppCard } from "@/components/AppCard";
+import { ContactForm } from "@/components/ContactForm";
 
 export const Route = createFileRoute("/")({
   head: () => ({
