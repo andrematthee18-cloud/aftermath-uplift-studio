@@ -24,6 +24,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const [contactOpen, setContactOpen] = useState(false);
   return (
     <main className="relative min-h-screen bg-background text-foreground">
       {/* Persistent 3D backdrop — visible behind every section for depth */}
