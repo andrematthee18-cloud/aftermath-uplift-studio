@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Activity, Heart, Skull, Mail, ArrowUpRight, MapPin } from "lucide-react";
+import { Activity, Heart, Skull, Mail, ArrowUpRight, MapPin, Wallet } from "lucide-react";
 import { Logo3D } from "@/components/Logo3D";
 import { LogoMark } from "@/components/LogoMark";
 import { AppCard } from "@/components/AppCard";
@@ -121,7 +121,7 @@ function Home() {
             <div>
               <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-accent">— Our Slate</p>
               <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
-                Three projects, one philosophy.
+                Four projects, one philosophy.
               </h2>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
@@ -129,7 +129,7 @@ function Home() {
             </p>
           </motion.div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             <AppCard
               index={0}
               name="Recovery Plus"
@@ -141,6 +141,15 @@ function Home() {
             />
             <AppCard
               index={1}
+              name="Habit Wealth"
+              tagline="Budget · Receipts · Credit"
+              status="in-development"
+              accent="oklch(0.72 0.17 145 / 0.55)"
+              icon={<Wallet className="h-6 w-6" />}
+              description="A budgeting companion that tracks expenses, income, and goals — snap a receipt to log spend instantly, and upload bank statements for an estimated credit score."
+            />
+            <AppCard
+              index={2}
               name="Zizie"
               tagline="Coming Soon"
               status="in-development"
@@ -149,7 +158,7 @@ function Home() {
               description="Our next companion app, currently taking shape in the studio. Something quietly useful is on the way — details revealed closer to release."
             />
             <AppCard
-              index={2}
+              index={3}
               name="Ubuntu: The Fall"
               tagline="Survival Game"
               status="concept"
