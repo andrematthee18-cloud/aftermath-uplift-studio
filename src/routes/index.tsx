@@ -129,7 +129,7 @@ function Home() {
             </p>
           </motion.div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             <AppCard
               index={0}
               name="Recovery Plus"
@@ -138,6 +138,15 @@ function Home() {
               accent="oklch(0.7 0.18 35 / 0.6)"
               icon={<Heart className="h-6 w-6" />}
               description="A daily tracker built with recovering addicts in mind — sobriety streaks, accountability partners, and quiet check-ins that show up when willpower runs low."
+            />
+            <AppCard
+              index={1}
+              name="Habit Wealth"
+              tagline="Budget · Receipts · Credit"
+              status="in-development"
+              accent="oklch(0.72 0.17 145 / 0.55)"
+              icon={<Wallet className="h-6 w-6" />}
+              description="A budgeting companion that tracks expenses, income, and goals — snap a receipt to log spend instantly, and upload bank statements for an estimated credit score."
             />
             <AppCard
               index={1}
