@@ -149,7 +149,7 @@ function Home() {
               description="A budgeting companion that tracks expenses, income, and goals — snap a receipt to log spend instantly, and upload bank statements for an estimated credit score."
             />
             <AppCard
-              index={1}
+              index={2}
               name="Zizie"
               tagline="Coming Soon"
               status="in-development"
