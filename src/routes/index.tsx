@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Activity, Heart, Skull, Mail, ArrowUpRight, MapPin } from "lucide-react";
+import { Activity, Heart, Skull, Mail, ArrowUpRight, MapPin, Wallet } from "lucide-react";
 import { Logo3D } from "@/components/Logo3D";
 import { LogoMark } from "@/components/LogoMark";
 import { AppCard } from "@/components/AppCard";
