@@ -1,6 +1,6 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
-import { EffectComposer, Pixelation, Bloom } from "@react-three/postprocessing";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { Suspense, useMemo, useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 
@@ -175,24 +175,6 @@ function HudGrid({ scrollProgress }: { scrollProgress: React.MutableRefObject<nu
   );
 }
 
-/**
- * Pixelation effect that surges during the transition between two forms
- * (when scroll progress is between two integer slots) and relaxes when
- * the camera is settled on a single form.
- */
-function ScrollPixelation({ scrollProgress }: { scrollProgress: React.MutableRefObject<number> }) {
-  const pixelationRef = useRef<any>(null);
-  useFrame(() => {
-    if (!pixelationRef.current) return;
-    const p = scrollProgress.current * (FORMS - 1);
-    const frac = p - Math.floor(p);
-    // bell curve: 0 at integer slots, 1 mid-transition
-    const transition = 1 - Math.abs(frac - 0.5) * 2;
-    const target = transition * 48; // strong pixelation at mid-transition
-    pixelationRef.current.granularity += (target - pixelationRef.current.granularity) * 0.1;
-  });
-  return <Pixelation ref={pixelationRef} granularity={0} />;
-}
 
 export function Logo3D() {
   const scrollProgress = useRef(0);
@@ -231,7 +213,6 @@ export function Logo3D() {
         <HudGrid scrollProgress={scrollProgress} />
         <Environment preset="night" />
         <EffectComposer>
-          <ScrollPixelation scrollProgress={scrollProgress} />
           <Bloom intensity={0.4} luminanceThreshold={0.55} luminanceSmoothing={0.2} mipmapBlur />
         </EffectComposer>
       </Suspense>
