@@ -213,7 +213,6 @@ export function Logo3D() {
         <HudGrid scrollProgress={scrollProgress} />
         <Environment preset="night" />
         <EffectComposer>
-          <ScrollPixelation scrollProgress={scrollProgress} />
           <Bloom intensity={0.4} luminanceThreshold={0.55} luminanceSmoothing={0.2} mipmapBlur />
         </EffectComposer>
       </Suspense>
