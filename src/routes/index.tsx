@@ -158,7 +158,7 @@ function Home() {
               description="Our next companion app, currently taking shape in the studio. Something quietly useful is on the way — details revealed closer to release."
             />
             <AppCard
-              index={2}
+              index={3}
               name="Ubuntu: The Fall"
               tagline="Survival Game"
               status="concept"
