@@ -121,7 +121,7 @@ function Home() {
             <div>
               <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-accent">— Our Slate</p>
               <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
-                Three projects, one philosophy.
+                Four projects, one philosophy.
               </h2>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
