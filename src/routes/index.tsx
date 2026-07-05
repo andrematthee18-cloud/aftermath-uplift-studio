@@ -6,6 +6,7 @@ import { Logo3D } from "@/components/Logo3D";
 import { LogoMark } from "@/components/LogoMark";
 import { AppCard } from "@/components/AppCard";
 import { ContactForm } from "@/components/ContactForm";
+import { WaitlistForm } from "@/components/WaitlistForm";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,6 +26,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const [contactOpen, setContactOpen] = useState(false);
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
   return (
     <main className="relative min-h-screen bg-background text-foreground">
       {/* Persistent 3D backdrop — visible behind every section for depth */}
@@ -138,6 +140,8 @@ function Home() {
               accent="oklch(0.7 0.18 35 / 0.6)"
               icon={<Heart className="h-6 w-6" />}
               description="A daily tracker built with recovering addicts in mind — sobriety streaks, accountability partners, and quiet check-ins that show up when willpower runs low."
+              ctaLabel="Join The Waitlist"
+              onCtaClick={() => setWaitlistOpen(true)}
             />
             <AppCard
               index={1}
@@ -237,6 +241,7 @@ function Home() {
       </footer>
 
       <ContactForm open={contactOpen} onOpenChange={setContactOpen} />
+      <WaitlistForm open={waitlistOpen} onOpenChange={setWaitlistOpen} product="Recovery Plus" />
     </main>
   );
 }
