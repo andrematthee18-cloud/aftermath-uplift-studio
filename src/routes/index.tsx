@@ -6,6 +6,7 @@ import { Logo3D } from "@/components/Logo3D";
 import { LogoMark } from "@/components/LogoMark";
 import { AppCard } from "@/components/AppCard";
 import { ContactForm } from "@/components/ContactForm";
+import { WaitlistForm } from "@/components/WaitlistForm";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,6 +26,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const [contactOpen, setContactOpen] = useState(false);
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
   return (
     <main className="relative min-h-screen bg-background text-foreground">
       {/* Persistent 3D backdrop — visible behind every section for depth */}
