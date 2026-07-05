@@ -23,7 +23,9 @@ export function WaitlistForm({
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "duplicate" | "error">(
+    "idle",
+  );
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -36,8 +38,12 @@ export function WaitlistForm({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ fullName, email, phone, product }),
       });
+      const data = await res.json().catch(() => ({}));
+      if (res.status === 409) {
+        setStatus("duplicate");
+        return;
+      }
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
         throw new Error(data.error || "Something went wrong");
       }
       setStatus("success");
@@ -71,9 +77,15 @@ export function WaitlistForm({
         {status === "success" ? (
           <div className="mt-4 flex flex-col items-center gap-3 py-6 text-center">
             <CheckCircle2 className="h-10 w-10 text-accent" />
-            <p className="text-sm text-foreground">You’re on the list.</p>
-            <p className="text-xs text-muted-foreground">
-              We’ll be in touch as soon as {product} is ready.
+            <p className="text-sm text-foreground">
+              Thank you! You've successfully joined the Recovery+ waitlist.
+            </p>
+          </div>
+        ) : status === "duplicate" ? (
+          <div className="mt-4 flex flex-col items-center gap-3 py-6 text-center">
+            <CheckCircle2 className="h-10 w-10 text-accent" />
+            <p className="text-sm text-foreground">
+              You're already on the Recovery+ waitlist.
             </p>
           </div>
         ) : (
