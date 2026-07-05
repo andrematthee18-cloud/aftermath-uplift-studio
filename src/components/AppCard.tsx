@@ -19,7 +19,7 @@ const STATUS_LABEL: Record<AppCardProps["status"], string> = {
   concept: "On the Horizon",
 };
 
-export function AppCard({ index, name, tagline, description, status, accent, icon }: AppCardProps) {
+export function AppCard({ index, name, tagline, description, status, accent, icon, ctaLabel, onCtaClick }: AppCardProps) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 40 }}
