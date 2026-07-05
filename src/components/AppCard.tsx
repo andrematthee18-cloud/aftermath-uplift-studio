@@ -47,6 +47,16 @@ export function AppCard({ index, name, tagline, description, status, accent, ico
           <p className="mt-1 text-sm uppercase tracking-wider text-accent">{tagline}</p>
         </div>
         <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
+        {ctaLabel && onCtaClick && (
+          <button
+            type="button"
+            onClick={onCtaClick}
+            className="group/cta mt-2 inline-flex w-fit items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-xs font-medium uppercase tracking-wider text-accent transition-colors hover:bg-accent hover:text-accent-foreground"
+          >
+            {ctaLabel}
+            <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover/cta:-translate-y-0.5 group-hover/cta:translate-x-0.5" />
+          </button>
+        )}
       </div>
     </motion.article>
   );
