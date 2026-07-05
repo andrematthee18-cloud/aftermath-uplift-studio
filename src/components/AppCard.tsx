@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
 interface AppCardProps {
   index: number;
@@ -8,6 +9,8 @@ interface AppCardProps {
   status: "launching" | "in-development" | "concept";
   accent: string;
   icon: React.ReactNode;
+  ctaLabel?: string;
+  onCtaClick?: () => void;
 }
 
 const STATUS_LABEL: Record<AppCardProps["status"], string> = {
