@@ -6,7 +6,6 @@ import { Logo3D } from "@/components/Logo3D";
 import { LogoMark } from "@/components/LogoMark";
 import { AppCard } from "@/components/AppCard";
 import { ContactForm } from "@/components/ContactForm";
-import { WaitlistForm } from "@/components/WaitlistForm";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,7 +25,6 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const [contactOpen, setContactOpen] = useState(false);
-  const [waitlistOpen, setWaitlistOpen] = useState(false);
   return (
     <main className="relative min-h-screen bg-background text-foreground">
       {/* Persistent 3D backdrop — visible behind every section for depth */}
@@ -140,8 +138,7 @@ function Home() {
               accent="oklch(0.7 0.18 35 / 0.6)"
               icon={<Heart className="h-6 w-6" />}
               description="A daily tracker built with recovering addicts in mind — sobriety streaks, accountability partners, and quiet check-ins that show up when willpower runs low."
-              ctaLabel="Join The Waitlist"
-              onCtaClick={() => setWaitlistOpen(true)}
+              to="/recovery-plus"
             />
             <AppCard
               index={1}
@@ -151,15 +148,17 @@ function Home() {
               accent="oklch(0.72 0.17 145 / 0.55)"
               icon={<Wallet className="h-6 w-6" />}
               description="A budgeting companion that tracks expenses, income, and goals — snap a receipt to log spend instantly, and upload bank statements for an estimated credit score."
+              to="/habit-wealth"
             />
             <AppCard
               index={2}
               name="Zizie"
-              tagline="Coming Soon"
+              tagline="Your AI. Everywhere."
               status="in-development"
               accent="oklch(0.65 0.18 200 / 0.5)"
               icon={<Activity className="h-6 w-6" />}
-              description="Our next companion app, currently taking shape in the studio. Something quietly useful is on the way — details revealed closer to release."
+              description="A next-generation personal AI companion with continuous memory that follows you across every device."
+              to="/zizie"
             />
             <AppCard
               index={3}
@@ -169,6 +168,7 @@ function Home() {
               accent="oklch(0.55 0.2 25 / 0.5)"
               icon={<Skull className="h-6 w-6" />}
               description="A survival game rooted in African landscape and lore. Scarcity, community, and the choices that decide who makes it through the night."
+              to="/ubuntu-the-fall"
             />
           </div>
         </div>
@@ -241,7 +241,6 @@ function Home() {
       </footer>
 
       <ContactForm open={contactOpen} onOpenChange={setContactOpen} />
-      <WaitlistForm open={waitlistOpen} onOpenChange={setWaitlistOpen} product="Recovery Plus" />
     </main>
   );
 }

@@ -9,9 +9,33 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ZizieRouteImport } from './routes/zizie'
+import { Route as UbuntuTheFallRouteImport } from './routes/ubuntu-the-fall'
+import { Route as RecoveryPlusRouteImport } from './routes/recovery-plus'
+import { Route as HabitWealthRouteImport } from './routes/habit-wealth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiPublicWaitlistRouteImport } from './routes/api/public/waitlist'
 
+const ZizieRoute = ZizieRouteImport.update({
+  id: '/zizie',
+  path: '/zizie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UbuntuTheFallRoute = UbuntuTheFallRouteImport.update({
+  id: '/ubuntu-the-fall',
+  path: '/ubuntu-the-fall',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecoveryPlusRoute = RecoveryPlusRouteImport.update({
+  id: '/recovery-plus',
+  path: '/recovery-plus',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HabitWealthRoute = HabitWealthRouteImport.update({
+  id: '/habit-wealth',
+  path: '/habit-wealth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -25,32 +49,95 @@ const ApiPublicWaitlistRoute = ApiPublicWaitlistRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/habit-wealth': typeof HabitWealthRoute
+  '/recovery-plus': typeof RecoveryPlusRoute
+  '/ubuntu-the-fall': typeof UbuntuTheFallRoute
+  '/zizie': typeof ZizieRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/habit-wealth': typeof HabitWealthRoute
+  '/recovery-plus': typeof RecoveryPlusRoute
+  '/ubuntu-the-fall': typeof UbuntuTheFallRoute
+  '/zizie': typeof ZizieRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/habit-wealth': typeof HabitWealthRoute
+  '/recovery-plus': typeof RecoveryPlusRoute
+  '/ubuntu-the-fall': typeof UbuntuTheFallRoute
+  '/zizie': typeof ZizieRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/public/waitlist'
+  fullPaths:
+    | '/'
+    | '/habit-wealth'
+    | '/recovery-plus'
+    | '/ubuntu-the-fall'
+    | '/zizie'
+    | '/api/public/waitlist'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/public/waitlist'
-  id: '__root__' | '/' | '/api/public/waitlist'
+  to:
+    | '/'
+    | '/habit-wealth'
+    | '/recovery-plus'
+    | '/ubuntu-the-fall'
+    | '/zizie'
+    | '/api/public/waitlist'
+  id:
+    | '__root__'
+    | '/'
+    | '/habit-wealth'
+    | '/recovery-plus'
+    | '/ubuntu-the-fall'
+    | '/zizie'
+    | '/api/public/waitlist'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HabitWealthRoute: typeof HabitWealthRoute
+  RecoveryPlusRoute: typeof RecoveryPlusRoute
+  UbuntuTheFallRoute: typeof UbuntuTheFallRoute
+  ZizieRoute: typeof ZizieRoute
   ApiPublicWaitlistRoute: typeof ApiPublicWaitlistRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/zizie': {
+      id: '/zizie'
+      path: '/zizie'
+      fullPath: '/zizie'
+      preLoaderRoute: typeof ZizieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ubuntu-the-fall': {
+      id: '/ubuntu-the-fall'
+      path: '/ubuntu-the-fall'
+      fullPath: '/ubuntu-the-fall'
+      preLoaderRoute: typeof UbuntuTheFallRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recovery-plus': {
+      id: '/recovery-plus'
+      path: '/recovery-plus'
+      fullPath: '/recovery-plus'
+      preLoaderRoute: typeof RecoveryPlusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/habit-wealth': {
+      id: '/habit-wealth'
+      path: '/habit-wealth'
+      fullPath: '/habit-wealth'
+      preLoaderRoute: typeof HabitWealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -70,6 +157,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HabitWealthRoute: HabitWealthRoute,
+  RecoveryPlusRoute: RecoveryPlusRoute,
+  UbuntuTheFallRoute: UbuntuTheFallRoute,
+  ZizieRoute: ZizieRoute,
   ApiPublicWaitlistRoute: ApiPublicWaitlistRoute,
 }
 export const routeTree = rootRouteImport
