@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ZizieRouteImport } from './routes/zizie'
+import { Route as UbuntuTheFallRouteImport } from './routes/ubuntu-the-fall'
 import { Route as RecoveryPlusRouteImport } from './routes/recovery-plus'
 import { Route as HabitWealthRouteImport } from './routes/habit-wealth'
 import { Route as IndexRouteImport } from './routes/index'
@@ -18,6 +19,11 @@ import { Route as ApiPublicWaitlistRouteImport } from './routes/api/public/waitl
 const ZizieRoute = ZizieRouteImport.update({
   id: '/zizie',
   path: '/zizie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UbuntuTheFallRoute = UbuntuTheFallRouteImport.update({
+  id: '/ubuntu-the-fall',
+  path: '/ubuntu-the-fall',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RecoveryPlusRoute = RecoveryPlusRouteImport.update({
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/habit-wealth': typeof HabitWealthRoute
   '/recovery-plus': typeof RecoveryPlusRoute
+  '/ubuntu-the-fall': typeof UbuntuTheFallRoute
   '/zizie': typeof ZizieRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/habit-wealth': typeof HabitWealthRoute
   '/recovery-plus': typeof RecoveryPlusRoute
+  '/ubuntu-the-fall': typeof UbuntuTheFallRoute
   '/zizie': typeof ZizieRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
@@ -60,6 +68,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/habit-wealth': typeof HabitWealthRoute
   '/recovery-plus': typeof RecoveryPlusRoute
+  '/ubuntu-the-fall': typeof UbuntuTheFallRoute
   '/zizie': typeof ZizieRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
@@ -69,6 +78,7 @@ export interface FileRouteTypes {
     | '/'
     | '/habit-wealth'
     | '/recovery-plus'
+    | '/ubuntu-the-fall'
     | '/zizie'
     | '/api/public/waitlist'
   fileRoutesByTo: FileRoutesByTo
@@ -76,6 +86,7 @@ export interface FileRouteTypes {
     | '/'
     | '/habit-wealth'
     | '/recovery-plus'
+    | '/ubuntu-the-fall'
     | '/zizie'
     | '/api/public/waitlist'
   id:
@@ -83,6 +94,7 @@ export interface FileRouteTypes {
     | '/'
     | '/habit-wealth'
     | '/recovery-plus'
+    | '/ubuntu-the-fall'
     | '/zizie'
     | '/api/public/waitlist'
   fileRoutesById: FileRoutesById
@@ -91,6 +103,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   HabitWealthRoute: typeof HabitWealthRoute
   RecoveryPlusRoute: typeof RecoveryPlusRoute
+  UbuntuTheFallRoute: typeof UbuntuTheFallRoute
   ZizieRoute: typeof ZizieRoute
   ApiPublicWaitlistRoute: typeof ApiPublicWaitlistRoute
 }
@@ -102,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/zizie'
       fullPath: '/zizie'
       preLoaderRoute: typeof ZizieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ubuntu-the-fall': {
+      id: '/ubuntu-the-fall'
+      path: '/ubuntu-the-fall'
+      fullPath: '/ubuntu-the-fall'
+      preLoaderRoute: typeof UbuntuTheFallRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/recovery-plus': {
@@ -139,6 +159,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   HabitWealthRoute: HabitWealthRoute,
   RecoveryPlusRoute: RecoveryPlusRoute,
+  UbuntuTheFallRoute: UbuntuTheFallRoute,
   ZizieRoute: ZizieRoute,
   ApiPublicWaitlistRoute: ApiPublicWaitlistRoute,
 }
