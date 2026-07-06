@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RecoveryPlusRouteImport } from './routes/recovery-plus'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiPublicWaitlistRouteImport } from './routes/api/public/waitlist'
 
+const RecoveryPlusRoute = RecoveryPlusRouteImport.update({
+  id: '/recovery-plus',
+  path: '/recovery-plus',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -25,32 +31,43 @@ const ApiPublicWaitlistRoute = ApiPublicWaitlistRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/recovery-plus': typeof RecoveryPlusRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/recovery-plus': typeof RecoveryPlusRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/recovery-plus': typeof RecoveryPlusRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/public/waitlist'
+  fullPaths: '/' | '/recovery-plus' | '/api/public/waitlist'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/public/waitlist'
-  id: '__root__' | '/' | '/api/public/waitlist'
+  to: '/' | '/recovery-plus' | '/api/public/waitlist'
+  id: '__root__' | '/' | '/recovery-plus' | '/api/public/waitlist'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  RecoveryPlusRoute: typeof RecoveryPlusRoute
   ApiPublicWaitlistRoute: typeof ApiPublicWaitlistRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/recovery-plus': {
+      id: '/recovery-plus'
+      path: '/recovery-plus'
+      fullPath: '/recovery-plus'
+      preLoaderRoute: typeof RecoveryPlusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  RecoveryPlusRoute: RecoveryPlusRoute,
   ApiPublicWaitlistRoute: ApiPublicWaitlistRoute,
 }
 export const routeTree = rootRouteImport
