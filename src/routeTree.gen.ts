@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ZizieRouteImport } from './routes/zizie'
 import { Route as RecoveryPlusRouteImport } from './routes/recovery-plus'
 import { Route as HabitWealthRouteImport } from './routes/habit-wealth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiPublicWaitlistRouteImport } from './routes/api/public/waitlist'
 
+const ZizieRoute = ZizieRouteImport.update({
+  id: '/zizie',
+  path: '/zizie',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RecoveryPlusRoute = RecoveryPlusRouteImport.update({
   id: '/recovery-plus',
   path: '/recovery-plus',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/habit-wealth': typeof HabitWealthRoute
   '/recovery-plus': typeof RecoveryPlusRoute
+  '/zizie': typeof ZizieRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/habit-wealth': typeof HabitWealthRoute
   '/recovery-plus': typeof RecoveryPlusRoute
+  '/zizie': typeof ZizieRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRoutesById {
@@ -52,18 +60,30 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/habit-wealth': typeof HabitWealthRoute
   '/recovery-plus': typeof RecoveryPlusRoute
+  '/zizie': typeof ZizieRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/habit-wealth' | '/recovery-plus' | '/api/public/waitlist'
+  fullPaths:
+    | '/'
+    | '/habit-wealth'
+    | '/recovery-plus'
+    | '/zizie'
+    | '/api/public/waitlist'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/habit-wealth' | '/recovery-plus' | '/api/public/waitlist'
+  to:
+    | '/'
+    | '/habit-wealth'
+    | '/recovery-plus'
+    | '/zizie'
+    | '/api/public/waitlist'
   id:
     | '__root__'
     | '/'
     | '/habit-wealth'
     | '/recovery-plus'
+    | '/zizie'
     | '/api/public/waitlist'
   fileRoutesById: FileRoutesById
 }
@@ -71,11 +91,19 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   HabitWealthRoute: typeof HabitWealthRoute
   RecoveryPlusRoute: typeof RecoveryPlusRoute
+  ZizieRoute: typeof ZizieRoute
   ApiPublicWaitlistRoute: typeof ApiPublicWaitlistRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/zizie': {
+      id: '/zizie'
+      path: '/zizie'
+      fullPath: '/zizie'
+      preLoaderRoute: typeof ZizieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/recovery-plus': {
       id: '/recovery-plus'
       path: '/recovery-plus'
@@ -111,6 +139,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   HabitWealthRoute: HabitWealthRoute,
   RecoveryPlusRoute: RecoveryPlusRoute,
+  ZizieRoute: ZizieRoute,
   ApiPublicWaitlistRoute: ApiPublicWaitlistRoute,
 }
 export const routeTree = rootRouteImport
