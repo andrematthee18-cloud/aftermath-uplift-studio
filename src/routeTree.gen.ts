@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RecoveryPlusRouteImport } from './routes/recovery-plus'
+import { Route as HabitWealthRouteImport } from './routes/habit-wealth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiPublicWaitlistRouteImport } from './routes/api/public/waitlist'
 
 const RecoveryPlusRoute = RecoveryPlusRouteImport.update({
   id: '/recovery-plus',
   path: '/recovery-plus',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HabitWealthRoute = HabitWealthRouteImport.update({
+  id: '/habit-wealth',
+  path: '/habit-wealth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -31,30 +37,39 @@ const ApiPublicWaitlistRoute = ApiPublicWaitlistRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/habit-wealth': typeof HabitWealthRoute
   '/recovery-plus': typeof RecoveryPlusRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/habit-wealth': typeof HabitWealthRoute
   '/recovery-plus': typeof RecoveryPlusRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/habit-wealth': typeof HabitWealthRoute
   '/recovery-plus': typeof RecoveryPlusRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/recovery-plus' | '/api/public/waitlist'
+  fullPaths: '/' | '/habit-wealth' | '/recovery-plus' | '/api/public/waitlist'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/recovery-plus' | '/api/public/waitlist'
-  id: '__root__' | '/' | '/recovery-plus' | '/api/public/waitlist'
+  to: '/' | '/habit-wealth' | '/recovery-plus' | '/api/public/waitlist'
+  id:
+    | '__root__'
+    | '/'
+    | '/habit-wealth'
+    | '/recovery-plus'
+    | '/api/public/waitlist'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HabitWealthRoute: typeof HabitWealthRoute
   RecoveryPlusRoute: typeof RecoveryPlusRoute
   ApiPublicWaitlistRoute: typeof ApiPublicWaitlistRoute
 }
@@ -66,6 +81,13 @@ declare module '@tanstack/react-router' {
       path: '/recovery-plus'
       fullPath: '/recovery-plus'
       preLoaderRoute: typeof RecoveryPlusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/habit-wealth': {
+      id: '/habit-wealth'
+      path: '/habit-wealth'
+      fullPath: '/habit-wealth'
+      preLoaderRoute: typeof HabitWealthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -87,6 +109,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HabitWealthRoute: HabitWealthRoute,
   RecoveryPlusRoute: RecoveryPlusRoute,
   ApiPublicWaitlistRoute: ApiPublicWaitlistRoute,
 }
