@@ -241,7 +241,6 @@ function Home() {
       </footer>
 
       <ContactForm open={contactOpen} onOpenChange={setContactOpen} />
-      <WaitlistForm open={waitlistOpen} onOpenChange={setWaitlistOpen} product="Recovery Plus" />
     </main>
   );
 }
