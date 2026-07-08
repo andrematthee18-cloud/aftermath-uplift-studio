@@ -89,6 +89,9 @@ function RecoveryPlusPage() {
           </p>
           <p>Every day is another opportunity to take one measurable step forward.</p>
           <p className="text-xl font-semibold text-accent">Recovery Beyond Sobriety.</p>
+          <div className="pt-6">
+            <InlineWaitlistForm product="Recovery Plus" />
+          </div>
         </>
       }
     />
