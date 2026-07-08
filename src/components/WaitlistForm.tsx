@@ -53,7 +53,7 @@ export function WaitlistForm({
         data: { fullName, email, phone, product },
       });
 
-      if (result.duplicate) {
+      if ("duplicate" in result && result.duplicate) {
         setStatus("duplicate");
         return;
       }
