@@ -12,13 +12,15 @@ interface Payload {
   email: string;
   phone_number?: string | null;
   created_at: string;
+  product?: string;
 }
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { full_name, email, phone_number, created_at } = (await req.json()) as Payload;
+    const { full_name, email, phone_number, created_at, product = "Recovery+" } =
+      (await req.json()) as Payload;
 
     if (!full_name || !email || !created_at) {
       return new Response(JSON.stringify({ error: "Missing required fields" }), {
@@ -51,34 +53,33 @@ Deno.serve(async (req) => {
     const phoneLine = phone_number ?? "Not provided";
 
     try {
-      // Notify sales
       await client.send({
         from: "sales@aftermathstudio.co.za",
         to: "sales@aftermathstudio.co.za",
         replyTo: email,
-        subject: "New Recovery+ Waitlist Signup",
-        content: `A new user has joined the Recovery+ waitlist.
+        subject: `New ${product} Waitlist Signup`,
+        content: `A new user has joined the ${product} waitlist.
 
 Name: ${full_name}
 Email: ${email}
 Phone: ${phoneLine}
+Product: ${product}
 Submitted: ${created_at}
 `,
       });
 
-      // Confirmation to user
       await client.send({
         from: "sales@aftermathstudio.co.za",
         to: email,
-        subject: "Welcome to Recovery+",
+        subject: `Welcome to ${product}`,
         content: `Hi ${full_name},
 
-Thank you for joining the Recovery+ waitlist.
+Thank you for joining the ${product} waitlist.
 
-We're excited to have you with us. We'll let you know as soon as Recovery+ is available.
+We're excited to have you with us. We'll let you know as soon as ${product} is available.
 
 Kind regards,
-The Recovery+ Team
+The Aftermath Studio Team
 `,
       });
     } finally {
