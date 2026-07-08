@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Heart } from "lucide-react";
 import { AppPageLayout } from "@/components/AppPageLayout";
+import { InlineWaitlistForm } from "@/components/InlineWaitlistForm";
 
 export const Route = createFileRoute("/recovery-plus")({
   head: () => ({
