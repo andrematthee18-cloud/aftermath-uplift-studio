@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Heart } from "lucide-react";
 import { AppPageLayout } from "@/components/AppPageLayout";
+import { InlineWaitlistForm } from "@/components/InlineWaitlistForm";
 
 export const Route = createFileRoute("/recovery-plus")({
   head: () => ({
@@ -88,6 +89,9 @@ function RecoveryPlusPage() {
           </p>
           <p>Every day is another opportunity to take one measurable step forward.</p>
           <p className="text-xl font-semibold text-accent">Recovery Beyond Sobriety.</p>
+          <div className="pt-6">
+            <InlineWaitlistForm product="Recovery Plus" />
+          </div>
         </>
       }
     />
