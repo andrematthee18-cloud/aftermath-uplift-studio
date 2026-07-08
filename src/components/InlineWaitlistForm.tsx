@@ -1,13 +1,22 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mail, Phone, User, Send, Loader2, CheckCircle2 } from "lucide-react";
+import { Mail, User, Send, Loader2, CheckCircle2 } from "lucide-react";
+import { useServerFn } from "@tanstack/react-start";
 import { Input } from "@/components/ui/input";
+import { joinWaitlist } from "@/lib/waitlist.functions";
+import {
+  defaultPhoneCountry,
+  formatInternationalPhone,
+  PhoneNumberField,
+} from "@/components/PhoneNumberField";
 
 export function InlineWaitlistForm({ product = "Recovery Plus" }: { product?: string }) {
+  const joinWaitlistFn = useServerFn(joinWaitlist);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phoneCountry, setPhoneCountry] = useState(defaultPhoneCountry);
+  const [phoneLocal, setPhoneLocal] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "duplicate" | "error">(
     "idle",
   );
@@ -18,23 +27,30 @@ export function InlineWaitlistForm({ product = "Recovery Plus" }: { product?: st
     setStatus("loading");
     setErrorMsg("");
     try {
-      const res = await fetch("/api/public/waitlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fullName, email, phone, product }),
+      const phone = formatInternationalPhone(phoneCountry, phoneLocal);
+      if (!phone) {
+        setStatus("error");
+        setErrorMsg("Please enter your phone number.");
+        return;
+      }
+
+      const result = await joinWaitlistFn({
+        data: { fullName, email, phone, product },
       });
-      const data = await res.json().catch(() => ({}));
-      if (res.status === 409) {
+
+      if ("duplicate" in result && result.duplicate) {
         setStatus("duplicate");
         return;
       }
-      if (!res.ok) {
-        throw new Error(data.error || `Request failed (${res.status})`);
+
+      if (!result.ok) {
+        throw new Error(result.error || "Something went wrong");
       }
+
       setStatus("success");
       setFullName("");
       setEmail("");
-      setPhone("");
+      setPhoneLocal("");
     } catch (err) {
       setStatus("error");
       setErrorMsg(err instanceof Error ? err.message : "Something went wrong");
@@ -102,20 +118,12 @@ export function InlineWaitlistForm({ product = "Recovery Plus" }: { product?: st
         />
       </div>
 
-      <div className="space-y-2">
-        <label className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-          <Phone className="h-3.5 w-3.5" /> Phone Number
-        </label>
-        <Input
-          type="tel"
-          required
-          placeholder="+27 12 345 6789"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          maxLength={40}
-          className="border-border bg-background/60"
-        />
-      </div>
+      <PhoneNumberField
+        countryId={phoneCountry}
+        localNumber={phoneLocal}
+        onCountryChange={setPhoneCountry}
+        onLocalNumberChange={setPhoneLocal}
+      />
 
       {status === "error" && <p className="text-xs text-destructive">{errorMsg}</p>}
 

@@ -5,7 +5,8 @@ import { z } from "zod";
 const schema = z.object({
   fullName: z.string().trim().min(1).max(120),
   email: z.string().trim().email().max(255).toLowerCase(),
-  phone: z.string().trim().max(40).optional().default(""),
+  phone: z.string().trim().min(6).max(40),
+  product: z.string().trim().min(1).max(120).optional().default("Recovery Plus"),
 });
 
 export const Route = createFileRoute("/api/public/waitlist")({
@@ -22,51 +23,37 @@ export const Route = createFileRoute("/api/public/waitlist")({
         if (!parsed.success) {
           return Response.json({ error: "Invalid input" }, { status: 400 });
         }
-        const { fullName, email, phone } = parsed.data;
-        const phoneNumber = phone.length > 0 ? phone : null;
+        const { fullName, email, phone, product } = parsed.data;
 
         const supabaseUrl = process.env.SUPABASE_URL!;
+        const publishableKey =
+          process.env.SUPABASE_PUBLISHABLE_KEY ?? process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+        if (!supabaseUrl || !publishableKey) {
+          console.error("waitlist configuration missing");
+          return Response.json({ error: "Waitlist is temporarily unavailable" }, { status: 500 });
+        }
+
         const supabase = createClient(
           supabaseUrl,
-          process.env.SUPABASE_SERVICE_ROLE_KEY!,
+          publishableKey,
           { auth: { persistSession: false, autoRefreshToken: false } },
         );
 
-        // Check for existing signup
-        const { data: existing, error: selectError } = await supabase
-          .from("waitlist")
-          .select("id")
-          .eq("email", email)
-          .maybeSingle();
-
-        if (selectError) {
-          console.error("waitlist select error", selectError);
-          return Response.json({ error: "Could not process signup" }, { status: 500 });
-        }
-
-        if (existing) {
-          return Response.json(
-            { error: "You're already on the Recovery+ waitlist." },
-            { status: 409 },
-          );
-        }
-
-        const { data: inserted, error: insertError } = await supabase
+        const createdAt = new Date().toISOString();
+        const { error: insertError } = await supabase
           .from("waitlist")
           .insert({
             full_name: fullName,
             email,
-            phone_number: phoneNumber,
+            phone_number: phone,
             source: "website",
-          })
-          .select("full_name, email, phone_number, created_at")
-          .single();
+          });
 
-        if (insertError || !inserted) {
-          // Unique constraint race
+        if (insertError) {
           if (insertError?.code === "23505") {
             return Response.json(
-              { error: "You're already on the Recovery+ waitlist." },
+              { error: `You're already on the ${product} waitlist.` },
               { status: 409 },
             );
           }
@@ -81,9 +68,16 @@ export const Route = createFileRoute("/api/public/waitlist")({
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY!}`,
+              apikey: publishableKey,
+              Authorization: `Bearer ${publishableKey}`,
             },
-            body: JSON.stringify(inserted),
+            body: JSON.stringify({
+              full_name: fullName,
+              email,
+              phone_number: phone,
+              created_at: createdAt,
+              product,
+            }),
           });
           if (!res.ok) {
             const text = await res.text().catch(() => "");
