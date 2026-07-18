@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Activity, Heart, Skull, Mail, ArrowUpRight, MapPin, Wallet } from "lucide-react";
+import { SocialLinks } from "@/components/SocialLinks";
 import { Logo3D } from "@/components/Logo3D";
 import { LogoMark } from "@/components/LogoMark";
 import { AppCard } from "@/components/AppCard";
@@ -231,11 +232,12 @@ function Home() {
 
       {/* FOOTER */}
       <footer className="relative z-10 border-t border-border bg-background/40 px-6 py-10 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 text-xs text-muted-foreground">
           <div className="flex items-center gap-3">
             <LogoMark className="h-6 w-6" />
             <span className="font-mono uppercase tracking-[0.25em]">© {new Date().getFullYear()} Aftermath Studio</span>
           </div>
+          <SocialLinks />
           <span className="font-mono uppercase tracking-[0.25em]">Made in South Africa 🇿🇦</span>
         </div>
       </footer>
