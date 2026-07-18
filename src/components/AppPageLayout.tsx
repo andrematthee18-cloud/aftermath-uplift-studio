@@ -5,6 +5,7 @@ import { useState, type ReactNode } from "react";
 import { LogoMark } from "@/components/LogoMark";
 import { Logo3D } from "@/components/Logo3D";
 import { WaitlistForm } from "@/components/WaitlistForm";
+import { SocialLinks } from "@/components/SocialLinks";
 
 interface AppPageLayoutProps {
   name: string;
