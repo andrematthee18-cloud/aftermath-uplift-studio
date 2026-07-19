@@ -1,7 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Heart } from "lucide-react";
 import { AppPageLayout } from "@/components/AppPageLayout";
 import { RecoveryPlusWaitlistForm } from "@/components/RecoveryPlusWaitlistForm";
+
+const legalLinks = [
+  { to: "/recovery-plus/privacy-policy", label: "Privacy Policy" },
+  { to: "/recovery-plus/terms", label: "Terms & Conditions" },
+  { to: "/recovery-plus/data-retention", label: "Data Retention & Account Deletion" },
+  { to: "/recovery-plus/community-guidelines", label: "User Agreement & Community Guidelines" },
+  { to: "/recovery-plus/ai-disclaimer", label: "AI & Medical Disclaimer" },
+] as const;
 
 export const Route = createFileRoute("/recovery-plus/")({
   head: () => ({
