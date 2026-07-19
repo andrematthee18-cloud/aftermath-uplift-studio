@@ -100,6 +100,23 @@ function RecoveryPlusPage() {
           <div className="pt-6">
             <RecoveryPlusWaitlistForm />
           </div>
+          <div className="pt-10">
+            <h3 className="text-sm font-semibold uppercase tracking-widest text-foreground">
+              Policies & Legal
+            </h3>
+            <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+              {legalLinks.map((link) => (
+                <li key={link.to}>
+                  <Link
+                    to={link.to}
+                    className="inline-flex text-sm text-muted-foreground transition-colors hover:text-accent"
+                  >
+                    → {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </>
       }
     />
