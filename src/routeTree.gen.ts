@@ -14,6 +14,12 @@ import { Route as UbuntuTheFallRouteImport } from './routes/ubuntu-the-fall'
 import { Route as RecoveryPlusRouteImport } from './routes/recovery-plus'
 import { Route as HabitWealthRouteImport } from './routes/habit-wealth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RecoveryPlusIndexRouteImport } from './routes/recovery-plus.index'
+import { Route as RecoveryPlusTermsRouteImport } from './routes/recovery-plus.terms'
+import { Route as RecoveryPlusPrivacyPolicyRouteImport } from './routes/recovery-plus.privacy-policy'
+import { Route as RecoveryPlusDataRetentionRouteImport } from './routes/recovery-plus.data-retention'
+import { Route as RecoveryPlusCommunityGuidelinesRouteImport } from './routes/recovery-plus.community-guidelines'
+import { Route as RecoveryPlusAiDisclaimerRouteImport } from './routes/recovery-plus.ai-disclaimer'
 import { Route as ApiPublicWaitlistRouteImport } from './routes/api/public/waitlist'
 
 const ZizieRoute = ZizieRouteImport.update({
@@ -41,6 +47,40 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RecoveryPlusIndexRoute = RecoveryPlusIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => RecoveryPlusRoute,
+} as any)
+const RecoveryPlusTermsRoute = RecoveryPlusTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => RecoveryPlusRoute,
+} as any)
+const RecoveryPlusPrivacyPolicyRoute =
+  RecoveryPlusPrivacyPolicyRouteImport.update({
+    id: '/privacy-policy',
+    path: '/privacy-policy',
+    getParentRoute: () => RecoveryPlusRoute,
+  } as any)
+const RecoveryPlusDataRetentionRoute =
+  RecoveryPlusDataRetentionRouteImport.update({
+    id: '/data-retention',
+    path: '/data-retention',
+    getParentRoute: () => RecoveryPlusRoute,
+  } as any)
+const RecoveryPlusCommunityGuidelinesRoute =
+  RecoveryPlusCommunityGuidelinesRouteImport.update({
+    id: '/community-guidelines',
+    path: '/community-guidelines',
+    getParentRoute: () => RecoveryPlusRoute,
+  } as any)
+const RecoveryPlusAiDisclaimerRoute =
+  RecoveryPlusAiDisclaimerRouteImport.update({
+    id: '/ai-disclaimer',
+    path: '/ai-disclaimer',
+    getParentRoute: () => RecoveryPlusRoute,
+  } as any)
 const ApiPublicWaitlistRoute = ApiPublicWaitlistRouteImport.update({
   id: '/api/public/waitlist',
   path: '/api/public/waitlist',
@@ -50,26 +90,43 @@ const ApiPublicWaitlistRoute = ApiPublicWaitlistRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/habit-wealth': typeof HabitWealthRoute
-  '/recovery-plus': typeof RecoveryPlusRoute
+  '/recovery-plus': typeof RecoveryPlusRouteWithChildren
   '/ubuntu-the-fall': typeof UbuntuTheFallRoute
   '/zizie': typeof ZizieRoute
+  '/recovery-plus/ai-disclaimer': typeof RecoveryPlusAiDisclaimerRoute
+  '/recovery-plus/community-guidelines': typeof RecoveryPlusCommunityGuidelinesRoute
+  '/recovery-plus/data-retention': typeof RecoveryPlusDataRetentionRoute
+  '/recovery-plus/privacy-policy': typeof RecoveryPlusPrivacyPolicyRoute
+  '/recovery-plus/terms': typeof RecoveryPlusTermsRoute
+  '/recovery-plus/': typeof RecoveryPlusIndexRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/habit-wealth': typeof HabitWealthRoute
-  '/recovery-plus': typeof RecoveryPlusRoute
   '/ubuntu-the-fall': typeof UbuntuTheFallRoute
   '/zizie': typeof ZizieRoute
+  '/recovery-plus/ai-disclaimer': typeof RecoveryPlusAiDisclaimerRoute
+  '/recovery-plus/community-guidelines': typeof RecoveryPlusCommunityGuidelinesRoute
+  '/recovery-plus/data-retention': typeof RecoveryPlusDataRetentionRoute
+  '/recovery-plus/privacy-policy': typeof RecoveryPlusPrivacyPolicyRoute
+  '/recovery-plus/terms': typeof RecoveryPlusTermsRoute
+  '/recovery-plus': typeof RecoveryPlusIndexRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/habit-wealth': typeof HabitWealthRoute
-  '/recovery-plus': typeof RecoveryPlusRoute
+  '/recovery-plus': typeof RecoveryPlusRouteWithChildren
   '/ubuntu-the-fall': typeof UbuntuTheFallRoute
   '/zizie': typeof ZizieRoute
+  '/recovery-plus/ai-disclaimer': typeof RecoveryPlusAiDisclaimerRoute
+  '/recovery-plus/community-guidelines': typeof RecoveryPlusCommunityGuidelinesRoute
+  '/recovery-plus/data-retention': typeof RecoveryPlusDataRetentionRoute
+  '/recovery-plus/privacy-policy': typeof RecoveryPlusPrivacyPolicyRoute
+  '/recovery-plus/terms': typeof RecoveryPlusTermsRoute
+  '/recovery-plus/': typeof RecoveryPlusIndexRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRouteTypes {
@@ -80,14 +137,25 @@ export interface FileRouteTypes {
     | '/recovery-plus'
     | '/ubuntu-the-fall'
     | '/zizie'
+    | '/recovery-plus/ai-disclaimer'
+    | '/recovery-plus/community-guidelines'
+    | '/recovery-plus/data-retention'
+    | '/recovery-plus/privacy-policy'
+    | '/recovery-plus/terms'
+    | '/recovery-plus/'
     | '/api/public/waitlist'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/habit-wealth'
-    | '/recovery-plus'
     | '/ubuntu-the-fall'
     | '/zizie'
+    | '/recovery-plus/ai-disclaimer'
+    | '/recovery-plus/community-guidelines'
+    | '/recovery-plus/data-retention'
+    | '/recovery-plus/privacy-policy'
+    | '/recovery-plus/terms'
+    | '/recovery-plus'
     | '/api/public/waitlist'
   id:
     | '__root__'
@@ -96,13 +164,19 @@ export interface FileRouteTypes {
     | '/recovery-plus'
     | '/ubuntu-the-fall'
     | '/zizie'
+    | '/recovery-plus/ai-disclaimer'
+    | '/recovery-plus/community-guidelines'
+    | '/recovery-plus/data-retention'
+    | '/recovery-plus/privacy-policy'
+    | '/recovery-plus/terms'
+    | '/recovery-plus/'
     | '/api/public/waitlist'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   HabitWealthRoute: typeof HabitWealthRoute
-  RecoveryPlusRoute: typeof RecoveryPlusRoute
+  RecoveryPlusRoute: typeof RecoveryPlusRouteWithChildren
   UbuntuTheFallRoute: typeof UbuntuTheFallRoute
   ZizieRoute: typeof ZizieRoute
   ApiPublicWaitlistRoute: typeof ApiPublicWaitlistRoute
@@ -145,6 +219,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/recovery-plus/': {
+      id: '/recovery-plus/'
+      path: '/'
+      fullPath: '/recovery-plus/'
+      preLoaderRoute: typeof RecoveryPlusIndexRouteImport
+      parentRoute: typeof RecoveryPlusRoute
+    }
+    '/recovery-plus/terms': {
+      id: '/recovery-plus/terms'
+      path: '/terms'
+      fullPath: '/recovery-plus/terms'
+      preLoaderRoute: typeof RecoveryPlusTermsRouteImport
+      parentRoute: typeof RecoveryPlusRoute
+    }
+    '/recovery-plus/privacy-policy': {
+      id: '/recovery-plus/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/recovery-plus/privacy-policy'
+      preLoaderRoute: typeof RecoveryPlusPrivacyPolicyRouteImport
+      parentRoute: typeof RecoveryPlusRoute
+    }
+    '/recovery-plus/data-retention': {
+      id: '/recovery-plus/data-retention'
+      path: '/data-retention'
+      fullPath: '/recovery-plus/data-retention'
+      preLoaderRoute: typeof RecoveryPlusDataRetentionRouteImport
+      parentRoute: typeof RecoveryPlusRoute
+    }
+    '/recovery-plus/community-guidelines': {
+      id: '/recovery-plus/community-guidelines'
+      path: '/community-guidelines'
+      fullPath: '/recovery-plus/community-guidelines'
+      preLoaderRoute: typeof RecoveryPlusCommunityGuidelinesRouteImport
+      parentRoute: typeof RecoveryPlusRoute
+    }
+    '/recovery-plus/ai-disclaimer': {
+      id: '/recovery-plus/ai-disclaimer'
+      path: '/ai-disclaimer'
+      fullPath: '/recovery-plus/ai-disclaimer'
+      preLoaderRoute: typeof RecoveryPlusAiDisclaimerRouteImport
+      parentRoute: typeof RecoveryPlusRoute
+    }
     '/api/public/waitlist': {
       id: '/api/public/waitlist'
       path: '/api/public/waitlist'
@@ -155,10 +271,32 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface RecoveryPlusRouteChildren {
+  RecoveryPlusAiDisclaimerRoute: typeof RecoveryPlusAiDisclaimerRoute
+  RecoveryPlusCommunityGuidelinesRoute: typeof RecoveryPlusCommunityGuidelinesRoute
+  RecoveryPlusDataRetentionRoute: typeof RecoveryPlusDataRetentionRoute
+  RecoveryPlusPrivacyPolicyRoute: typeof RecoveryPlusPrivacyPolicyRoute
+  RecoveryPlusTermsRoute: typeof RecoveryPlusTermsRoute
+  RecoveryPlusIndexRoute: typeof RecoveryPlusIndexRoute
+}
+
+const RecoveryPlusRouteChildren: RecoveryPlusRouteChildren = {
+  RecoveryPlusAiDisclaimerRoute: RecoveryPlusAiDisclaimerRoute,
+  RecoveryPlusCommunityGuidelinesRoute: RecoveryPlusCommunityGuidelinesRoute,
+  RecoveryPlusDataRetentionRoute: RecoveryPlusDataRetentionRoute,
+  RecoveryPlusPrivacyPolicyRoute: RecoveryPlusPrivacyPolicyRoute,
+  RecoveryPlusTermsRoute: RecoveryPlusTermsRoute,
+  RecoveryPlusIndexRoute: RecoveryPlusIndexRoute,
+}
+
+const RecoveryPlusRouteWithChildren = RecoveryPlusRoute._addFileChildren(
+  RecoveryPlusRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   HabitWealthRoute: HabitWealthRoute,
-  RecoveryPlusRoute: RecoveryPlusRoute,
+  RecoveryPlusRoute: RecoveryPlusRouteWithChildren,
   UbuntuTheFallRoute: UbuntuTheFallRoute,
   ZizieRoute: ZizieRoute,
   ApiPublicWaitlistRoute: ApiPublicWaitlistRoute,
@@ -166,13 +304,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
