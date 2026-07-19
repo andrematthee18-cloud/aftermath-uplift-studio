@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ZizieRouteImport } from './routes/zizie'
 import { Route as UbuntuTheFallRouteImport } from './routes/ubuntu-the-fall'
+import { Route as RecoveryPlusRouteImport } from './routes/recovery-plus'
 import { Route as HabitWealthRouteImport } from './routes/habit-wealth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RecoveryPlusIndexRouteImport } from './routes/recovery-plus.index'
@@ -26,6 +27,11 @@ const UbuntuTheFallRoute = UbuntuTheFallRouteImport.update({
   path: '/ubuntu-the-fall',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RecoveryPlusRoute = RecoveryPlusRouteImport.update({
+  id: '/recovery-plus',
+  path: '/recovery-plus',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HabitWealthRoute = HabitWealthRouteImport.update({
   id: '/habit-wealth',
   path: '/habit-wealth',
@@ -37,9 +43,9 @@ const IndexRoute = IndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const RecoveryPlusIndexRoute = RecoveryPlusIndexRouteImport.update({
-  id: '/recovery-plus/',
-  path: '/recovery-plus/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => RecoveryPlusRoute,
 } as any)
 const ApiPublicWaitlistRoute = ApiPublicWaitlistRouteImport.update({
   id: '/api/public/waitlist',
@@ -50,6 +56,7 @@ const ApiPublicWaitlistRoute = ApiPublicWaitlistRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/habit-wealth': typeof HabitWealthRoute
+  '/recovery-plus': typeof RecoveryPlusRouteWithChildren
   '/ubuntu-the-fall': typeof UbuntuTheFallRoute
   '/zizie': typeof ZizieRoute
   '/recovery-plus/': typeof RecoveryPlusIndexRoute
@@ -67,6 +74,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/habit-wealth': typeof HabitWealthRoute
+  '/recovery-plus': typeof RecoveryPlusRouteWithChildren
   '/ubuntu-the-fall': typeof UbuntuTheFallRoute
   '/zizie': typeof ZizieRoute
   '/recovery-plus/': typeof RecoveryPlusIndexRoute
@@ -77,6 +85,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/habit-wealth'
+    | '/recovery-plus'
     | '/ubuntu-the-fall'
     | '/zizie'
     | '/recovery-plus/'
@@ -93,6 +102,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/habit-wealth'
+    | '/recovery-plus'
     | '/ubuntu-the-fall'
     | '/zizie'
     | '/recovery-plus/'
@@ -102,9 +112,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   HabitWealthRoute: typeof HabitWealthRoute
+  RecoveryPlusRoute: typeof RecoveryPlusRouteWithChildren
   UbuntuTheFallRoute: typeof UbuntuTheFallRoute
   ZizieRoute: typeof ZizieRoute
-  RecoveryPlusIndexRoute: typeof RecoveryPlusIndexRoute
   ApiPublicWaitlistRoute: typeof ApiPublicWaitlistRoute
 }
 
@@ -124,6 +134,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UbuntuTheFallRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/recovery-plus': {
+      id: '/recovery-plus'
+      path: '/recovery-plus'
+      fullPath: '/recovery-plus'
+      preLoaderRoute: typeof RecoveryPlusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/habit-wealth': {
       id: '/habit-wealth'
       path: '/habit-wealth'
@@ -140,10 +157,10 @@ declare module '@tanstack/react-router' {
     }
     '/recovery-plus/': {
       id: '/recovery-plus/'
-      path: '/recovery-plus'
+      path: '/'
       fullPath: '/recovery-plus/'
       preLoaderRoute: typeof RecoveryPlusIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof RecoveryPlusRoute
     }
     '/api/public/waitlist': {
       id: '/api/public/waitlist'
@@ -155,12 +172,24 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface RecoveryPlusRouteChildren {
+  RecoveryPlusIndexRoute: typeof RecoveryPlusIndexRoute
+}
+
+const RecoveryPlusRouteChildren: RecoveryPlusRouteChildren = {
+  RecoveryPlusIndexRoute: RecoveryPlusIndexRoute,
+}
+
+const RecoveryPlusRouteWithChildren = RecoveryPlusRoute._addFileChildren(
+  RecoveryPlusRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   HabitWealthRoute: HabitWealthRoute,
+  RecoveryPlusRoute: RecoveryPlusRouteWithChildren,
   UbuntuTheFallRoute: UbuntuTheFallRoute,
   ZizieRoute: ZizieRoute,
-  RecoveryPlusIndexRoute: RecoveryPlusIndexRoute,
   ApiPublicWaitlistRoute: ApiPublicWaitlistRoute,
 }
 export const routeTree = rootRouteImport
