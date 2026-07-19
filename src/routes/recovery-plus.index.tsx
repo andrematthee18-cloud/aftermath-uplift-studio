@@ -3,7 +3,7 @@ import { Heart } from "lucide-react";
 import { AppPageLayout } from "@/components/AppPageLayout";
 import { RecoveryPlusWaitlistForm } from "@/components/RecoveryPlusWaitlistForm";
 
-export const Route = createFileRoute("/recovery-plus")({
+export const Route = createFileRoute("/recovery-plus/")({
   head: () => ({
     meta: [
       { title: "Recovery Plus — Recovery Beyond Sobriety | Aftermath Studio" },
