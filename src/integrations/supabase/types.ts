@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      account_deletion_requests: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          product: string
+          reason: string
+          status: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          product?: string
+          reason: string
+          status?: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          product?: string
+          reason?: string
+          status?: string
+        }
+        Relationships: []
+      }
       recovery_plus_waitlist: {
         Row: {
           created_at: string
