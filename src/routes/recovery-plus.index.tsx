@@ -9,6 +9,7 @@ const legalLinks = [
   { to: "/recovery-plus/data-retention", label: "Data Retention & Account Deletion" },
   { to: "/recovery-plus/community-guidelines", label: "User Agreement & Community Guidelines" },
   { to: "/recovery-plus/ai-disclaimer", label: "AI & Medical Disclaimer" },
+  { to: "/recovery-plus/delete-account", label: "Request Account Deletion" },
 ] as const;
 
 export const Route = createFileRoute("/recovery-plus/")({

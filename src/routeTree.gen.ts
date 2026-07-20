@@ -17,6 +17,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as RecoveryPlusIndexRouteImport } from './routes/recovery-plus.index'
 import { Route as RecoveryPlusTermsRouteImport } from './routes/recovery-plus.terms'
 import { Route as RecoveryPlusPrivacyPolicyRouteImport } from './routes/recovery-plus.privacy-policy'
+import { Route as RecoveryPlusDeleteAccountRouteImport } from './routes/recovery-plus.delete-account'
 import { Route as RecoveryPlusDataRetentionRouteImport } from './routes/recovery-plus.data-retention'
 import { Route as RecoveryPlusCommunityGuidelinesRouteImport } from './routes/recovery-plus.community-guidelines'
 import { Route as RecoveryPlusAiDisclaimerRouteImport } from './routes/recovery-plus.ai-disclaimer'
@@ -64,6 +65,12 @@ const RecoveryPlusPrivacyPolicyRoute =
     path: '/privacy-policy',
     getParentRoute: () => RecoveryPlusRoute,
   } as any)
+const RecoveryPlusDeleteAccountRoute =
+  RecoveryPlusDeleteAccountRouteImport.update({
+    id: '/delete-account',
+    path: '/delete-account',
+    getParentRoute: () => RecoveryPlusRoute,
+  } as any)
 const RecoveryPlusDataRetentionRoute =
   RecoveryPlusDataRetentionRouteImport.update({
     id: '/data-retention',
@@ -103,6 +110,7 @@ export interface FileRoutesByFullPath {
   '/recovery-plus/ai-disclaimer': typeof RecoveryPlusAiDisclaimerRoute
   '/recovery-plus/community-guidelines': typeof RecoveryPlusCommunityGuidelinesRoute
   '/recovery-plus/data-retention': typeof RecoveryPlusDataRetentionRoute
+  '/recovery-plus/delete-account': typeof RecoveryPlusDeleteAccountRoute
   '/recovery-plus/privacy-policy': typeof RecoveryPlusPrivacyPolicyRoute
   '/recovery-plus/terms': typeof RecoveryPlusTermsRoute
   '/recovery-plus/': typeof RecoveryPlusIndexRoute
@@ -117,6 +125,7 @@ export interface FileRoutesByTo {
   '/recovery-plus/ai-disclaimer': typeof RecoveryPlusAiDisclaimerRoute
   '/recovery-plus/community-guidelines': typeof RecoveryPlusCommunityGuidelinesRoute
   '/recovery-plus/data-retention': typeof RecoveryPlusDataRetentionRoute
+  '/recovery-plus/delete-account': typeof RecoveryPlusDeleteAccountRoute
   '/recovery-plus/privacy-policy': typeof RecoveryPlusPrivacyPolicyRoute
   '/recovery-plus/terms': typeof RecoveryPlusTermsRoute
   '/recovery-plus': typeof RecoveryPlusIndexRoute
@@ -133,6 +142,7 @@ export interface FileRoutesById {
   '/recovery-plus/ai-disclaimer': typeof RecoveryPlusAiDisclaimerRoute
   '/recovery-plus/community-guidelines': typeof RecoveryPlusCommunityGuidelinesRoute
   '/recovery-plus/data-retention': typeof RecoveryPlusDataRetentionRoute
+  '/recovery-plus/delete-account': typeof RecoveryPlusDeleteAccountRoute
   '/recovery-plus/privacy-policy': typeof RecoveryPlusPrivacyPolicyRoute
   '/recovery-plus/terms': typeof RecoveryPlusTermsRoute
   '/recovery-plus/': typeof RecoveryPlusIndexRoute
@@ -150,6 +160,7 @@ export interface FileRouteTypes {
     | '/recovery-plus/ai-disclaimer'
     | '/recovery-plus/community-guidelines'
     | '/recovery-plus/data-retention'
+    | '/recovery-plus/delete-account'
     | '/recovery-plus/privacy-policy'
     | '/recovery-plus/terms'
     | '/recovery-plus/'
@@ -164,6 +175,7 @@ export interface FileRouteTypes {
     | '/recovery-plus/ai-disclaimer'
     | '/recovery-plus/community-guidelines'
     | '/recovery-plus/data-retention'
+    | '/recovery-plus/delete-account'
     | '/recovery-plus/privacy-policy'
     | '/recovery-plus/terms'
     | '/recovery-plus'
@@ -179,6 +191,7 @@ export interface FileRouteTypes {
     | '/recovery-plus/ai-disclaimer'
     | '/recovery-plus/community-guidelines'
     | '/recovery-plus/data-retention'
+    | '/recovery-plus/delete-account'
     | '/recovery-plus/privacy-policy'
     | '/recovery-plus/terms'
     | '/recovery-plus/'
@@ -254,6 +267,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RecoveryPlusPrivacyPolicyRouteImport
       parentRoute: typeof RecoveryPlusRoute
     }
+    '/recovery-plus/delete-account': {
+      id: '/recovery-plus/delete-account'
+      path: '/delete-account'
+      fullPath: '/recovery-plus/delete-account'
+      preLoaderRoute: typeof RecoveryPlusDeleteAccountRouteImport
+      parentRoute: typeof RecoveryPlusRoute
+    }
     '/recovery-plus/data-retention': {
       id: '/recovery-plus/data-retention'
       path: '/data-retention'
@@ -296,6 +316,7 @@ interface RecoveryPlusRouteChildren {
   RecoveryPlusAiDisclaimerRoute: typeof RecoveryPlusAiDisclaimerRoute
   RecoveryPlusCommunityGuidelinesRoute: typeof RecoveryPlusCommunityGuidelinesRoute
   RecoveryPlusDataRetentionRoute: typeof RecoveryPlusDataRetentionRoute
+  RecoveryPlusDeleteAccountRoute: typeof RecoveryPlusDeleteAccountRoute
   RecoveryPlusPrivacyPolicyRoute: typeof RecoveryPlusPrivacyPolicyRoute
   RecoveryPlusTermsRoute: typeof RecoveryPlusTermsRoute
   RecoveryPlusIndexRoute: typeof RecoveryPlusIndexRoute
@@ -305,6 +326,7 @@ const RecoveryPlusRouteChildren: RecoveryPlusRouteChildren = {
   RecoveryPlusAiDisclaimerRoute: RecoveryPlusAiDisclaimerRoute,
   RecoveryPlusCommunityGuidelinesRoute: RecoveryPlusCommunityGuidelinesRoute,
   RecoveryPlusDataRetentionRoute: RecoveryPlusDataRetentionRoute,
+  RecoveryPlusDeleteAccountRoute: RecoveryPlusDeleteAccountRoute,
   RecoveryPlusPrivacyPolicyRoute: RecoveryPlusPrivacyPolicyRoute,
   RecoveryPlusTermsRoute: RecoveryPlusTermsRoute,
   RecoveryPlusIndexRoute: RecoveryPlusIndexRoute,
