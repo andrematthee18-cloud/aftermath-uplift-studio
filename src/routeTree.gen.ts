@@ -17,10 +17,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as RecoveryPlusIndexRouteImport } from './routes/recovery-plus.index'
 import { Route as RecoveryPlusTermsRouteImport } from './routes/recovery-plus.terms'
 import { Route as RecoveryPlusPrivacyPolicyRouteImport } from './routes/recovery-plus.privacy-policy'
+import { Route as RecoveryPlusDeleteAccountRouteImport } from './routes/recovery-plus.delete-account'
 import { Route as RecoveryPlusDataRetentionRouteImport } from './routes/recovery-plus.data-retention'
 import { Route as RecoveryPlusCommunityGuidelinesRouteImport } from './routes/recovery-plus.community-guidelines'
 import { Route as RecoveryPlusAiDisclaimerRouteImport } from './routes/recovery-plus.ai-disclaimer'
 import { Route as ApiPublicWaitlistRouteImport } from './routes/api/public/waitlist'
+import { Route as ApiPublicAccountDeletionRouteImport } from './routes/api/public/account-deletion'
 
 const ZizieRoute = ZizieRouteImport.update({
   id: '/zizie',
@@ -63,6 +65,12 @@ const RecoveryPlusPrivacyPolicyRoute =
     path: '/privacy-policy',
     getParentRoute: () => RecoveryPlusRoute,
   } as any)
+const RecoveryPlusDeleteAccountRoute =
+  RecoveryPlusDeleteAccountRouteImport.update({
+    id: '/delete-account',
+    path: '/delete-account',
+    getParentRoute: () => RecoveryPlusRoute,
+  } as any)
 const RecoveryPlusDataRetentionRoute =
   RecoveryPlusDataRetentionRouteImport.update({
     id: '/data-retention',
@@ -86,6 +94,12 @@ const ApiPublicWaitlistRoute = ApiPublicWaitlistRouteImport.update({
   path: '/api/public/waitlist',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicAccountDeletionRoute =
+  ApiPublicAccountDeletionRouteImport.update({
+    id: '/api/public/account-deletion',
+    path: '/api/public/account-deletion',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -96,9 +110,11 @@ export interface FileRoutesByFullPath {
   '/recovery-plus/ai-disclaimer': typeof RecoveryPlusAiDisclaimerRoute
   '/recovery-plus/community-guidelines': typeof RecoveryPlusCommunityGuidelinesRoute
   '/recovery-plus/data-retention': typeof RecoveryPlusDataRetentionRoute
+  '/recovery-plus/delete-account': typeof RecoveryPlusDeleteAccountRoute
   '/recovery-plus/privacy-policy': typeof RecoveryPlusPrivacyPolicyRoute
   '/recovery-plus/terms': typeof RecoveryPlusTermsRoute
   '/recovery-plus/': typeof RecoveryPlusIndexRoute
+  '/api/public/account-deletion': typeof ApiPublicAccountDeletionRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRoutesByTo {
@@ -109,9 +125,11 @@ export interface FileRoutesByTo {
   '/recovery-plus/ai-disclaimer': typeof RecoveryPlusAiDisclaimerRoute
   '/recovery-plus/community-guidelines': typeof RecoveryPlusCommunityGuidelinesRoute
   '/recovery-plus/data-retention': typeof RecoveryPlusDataRetentionRoute
+  '/recovery-plus/delete-account': typeof RecoveryPlusDeleteAccountRoute
   '/recovery-plus/privacy-policy': typeof RecoveryPlusPrivacyPolicyRoute
   '/recovery-plus/terms': typeof RecoveryPlusTermsRoute
   '/recovery-plus': typeof RecoveryPlusIndexRoute
+  '/api/public/account-deletion': typeof ApiPublicAccountDeletionRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRoutesById {
@@ -124,9 +142,11 @@ export interface FileRoutesById {
   '/recovery-plus/ai-disclaimer': typeof RecoveryPlusAiDisclaimerRoute
   '/recovery-plus/community-guidelines': typeof RecoveryPlusCommunityGuidelinesRoute
   '/recovery-plus/data-retention': typeof RecoveryPlusDataRetentionRoute
+  '/recovery-plus/delete-account': typeof RecoveryPlusDeleteAccountRoute
   '/recovery-plus/privacy-policy': typeof RecoveryPlusPrivacyPolicyRoute
   '/recovery-plus/terms': typeof RecoveryPlusTermsRoute
   '/recovery-plus/': typeof RecoveryPlusIndexRoute
+  '/api/public/account-deletion': typeof ApiPublicAccountDeletionRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRouteTypes {
@@ -140,9 +160,11 @@ export interface FileRouteTypes {
     | '/recovery-plus/ai-disclaimer'
     | '/recovery-plus/community-guidelines'
     | '/recovery-plus/data-retention'
+    | '/recovery-plus/delete-account'
     | '/recovery-plus/privacy-policy'
     | '/recovery-plus/terms'
     | '/recovery-plus/'
+    | '/api/public/account-deletion'
     | '/api/public/waitlist'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -153,9 +175,11 @@ export interface FileRouteTypes {
     | '/recovery-plus/ai-disclaimer'
     | '/recovery-plus/community-guidelines'
     | '/recovery-plus/data-retention'
+    | '/recovery-plus/delete-account'
     | '/recovery-plus/privacy-policy'
     | '/recovery-plus/terms'
     | '/recovery-plus'
+    | '/api/public/account-deletion'
     | '/api/public/waitlist'
   id:
     | '__root__'
@@ -167,9 +191,11 @@ export interface FileRouteTypes {
     | '/recovery-plus/ai-disclaimer'
     | '/recovery-plus/community-guidelines'
     | '/recovery-plus/data-retention'
+    | '/recovery-plus/delete-account'
     | '/recovery-plus/privacy-policy'
     | '/recovery-plus/terms'
     | '/recovery-plus/'
+    | '/api/public/account-deletion'
     | '/api/public/waitlist'
   fileRoutesById: FileRoutesById
 }
@@ -179,6 +205,7 @@ export interface RootRouteChildren {
   RecoveryPlusRoute: typeof RecoveryPlusRouteWithChildren
   UbuntuTheFallRoute: typeof UbuntuTheFallRoute
   ZizieRoute: typeof ZizieRoute
+  ApiPublicAccountDeletionRoute: typeof ApiPublicAccountDeletionRoute
   ApiPublicWaitlistRoute: typeof ApiPublicWaitlistRoute
 }
 
@@ -240,6 +267,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RecoveryPlusPrivacyPolicyRouteImport
       parentRoute: typeof RecoveryPlusRoute
     }
+    '/recovery-plus/delete-account': {
+      id: '/recovery-plus/delete-account'
+      path: '/delete-account'
+      fullPath: '/recovery-plus/delete-account'
+      preLoaderRoute: typeof RecoveryPlusDeleteAccountRouteImport
+      parentRoute: typeof RecoveryPlusRoute
+    }
     '/recovery-plus/data-retention': {
       id: '/recovery-plus/data-retention'
       path: '/data-retention'
@@ -268,6 +302,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicWaitlistRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/account-deletion': {
+      id: '/api/public/account-deletion'
+      path: '/api/public/account-deletion'
+      fullPath: '/api/public/account-deletion'
+      preLoaderRoute: typeof ApiPublicAccountDeletionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -275,6 +316,7 @@ interface RecoveryPlusRouteChildren {
   RecoveryPlusAiDisclaimerRoute: typeof RecoveryPlusAiDisclaimerRoute
   RecoveryPlusCommunityGuidelinesRoute: typeof RecoveryPlusCommunityGuidelinesRoute
   RecoveryPlusDataRetentionRoute: typeof RecoveryPlusDataRetentionRoute
+  RecoveryPlusDeleteAccountRoute: typeof RecoveryPlusDeleteAccountRoute
   RecoveryPlusPrivacyPolicyRoute: typeof RecoveryPlusPrivacyPolicyRoute
   RecoveryPlusTermsRoute: typeof RecoveryPlusTermsRoute
   RecoveryPlusIndexRoute: typeof RecoveryPlusIndexRoute
@@ -284,6 +326,7 @@ const RecoveryPlusRouteChildren: RecoveryPlusRouteChildren = {
   RecoveryPlusAiDisclaimerRoute: RecoveryPlusAiDisclaimerRoute,
   RecoveryPlusCommunityGuidelinesRoute: RecoveryPlusCommunityGuidelinesRoute,
   RecoveryPlusDataRetentionRoute: RecoveryPlusDataRetentionRoute,
+  RecoveryPlusDeleteAccountRoute: RecoveryPlusDeleteAccountRoute,
   RecoveryPlusPrivacyPolicyRoute: RecoveryPlusPrivacyPolicyRoute,
   RecoveryPlusTermsRoute: RecoveryPlusTermsRoute,
   RecoveryPlusIndexRoute: RecoveryPlusIndexRoute,
@@ -299,6 +342,7 @@ const rootRouteChildren: RootRouteChildren = {
   RecoveryPlusRoute: RecoveryPlusRouteWithChildren,
   UbuntuTheFallRoute: UbuntuTheFallRoute,
   ZizieRoute: ZizieRoute,
+  ApiPublicAccountDeletionRoute: ApiPublicAccountDeletionRoute,
   ApiPublicWaitlistRoute: ApiPublicWaitlistRoute,
 }
 export const routeTree = rootRouteImport
