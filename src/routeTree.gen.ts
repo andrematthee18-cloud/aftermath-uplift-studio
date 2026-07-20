@@ -21,6 +21,7 @@ import { Route as RecoveryPlusDataRetentionRouteImport } from './routes/recovery
 import { Route as RecoveryPlusCommunityGuidelinesRouteImport } from './routes/recovery-plus.community-guidelines'
 import { Route as RecoveryPlusAiDisclaimerRouteImport } from './routes/recovery-plus.ai-disclaimer'
 import { Route as ApiPublicWaitlistRouteImport } from './routes/api/public/waitlist'
+import { Route as ApiPublicAccountDeletionRouteImport } from './routes/api/public/account-deletion'
 
 const ZizieRoute = ZizieRouteImport.update({
   id: '/zizie',
@@ -86,6 +87,12 @@ const ApiPublicWaitlistRoute = ApiPublicWaitlistRouteImport.update({
   path: '/api/public/waitlist',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicAccountDeletionRoute =
+  ApiPublicAccountDeletionRouteImport.update({
+    id: '/api/public/account-deletion',
+    path: '/api/public/account-deletion',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -99,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/recovery-plus/privacy-policy': typeof RecoveryPlusPrivacyPolicyRoute
   '/recovery-plus/terms': typeof RecoveryPlusTermsRoute
   '/recovery-plus/': typeof RecoveryPlusIndexRoute
+  '/api/public/account-deletion': typeof ApiPublicAccountDeletionRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRoutesByTo {
@@ -112,6 +120,7 @@ export interface FileRoutesByTo {
   '/recovery-plus/privacy-policy': typeof RecoveryPlusPrivacyPolicyRoute
   '/recovery-plus/terms': typeof RecoveryPlusTermsRoute
   '/recovery-plus': typeof RecoveryPlusIndexRoute
+  '/api/public/account-deletion': typeof ApiPublicAccountDeletionRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRoutesById {
@@ -127,6 +136,7 @@ export interface FileRoutesById {
   '/recovery-plus/privacy-policy': typeof RecoveryPlusPrivacyPolicyRoute
   '/recovery-plus/terms': typeof RecoveryPlusTermsRoute
   '/recovery-plus/': typeof RecoveryPlusIndexRoute
+  '/api/public/account-deletion': typeof ApiPublicAccountDeletionRoute
   '/api/public/waitlist': typeof ApiPublicWaitlistRoute
 }
 export interface FileRouteTypes {
@@ -143,6 +153,7 @@ export interface FileRouteTypes {
     | '/recovery-plus/privacy-policy'
     | '/recovery-plus/terms'
     | '/recovery-plus/'
+    | '/api/public/account-deletion'
     | '/api/public/waitlist'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -156,6 +167,7 @@ export interface FileRouteTypes {
     | '/recovery-plus/privacy-policy'
     | '/recovery-plus/terms'
     | '/recovery-plus'
+    | '/api/public/account-deletion'
     | '/api/public/waitlist'
   id:
     | '__root__'
@@ -170,6 +182,7 @@ export interface FileRouteTypes {
     | '/recovery-plus/privacy-policy'
     | '/recovery-plus/terms'
     | '/recovery-plus/'
+    | '/api/public/account-deletion'
     | '/api/public/waitlist'
   fileRoutesById: FileRoutesById
 }
@@ -179,6 +192,7 @@ export interface RootRouteChildren {
   RecoveryPlusRoute: typeof RecoveryPlusRouteWithChildren
   UbuntuTheFallRoute: typeof UbuntuTheFallRoute
   ZizieRoute: typeof ZizieRoute
+  ApiPublicAccountDeletionRoute: typeof ApiPublicAccountDeletionRoute
   ApiPublicWaitlistRoute: typeof ApiPublicWaitlistRoute
 }
 
@@ -268,6 +282,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicWaitlistRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/account-deletion': {
+      id: '/api/public/account-deletion'
+      path: '/api/public/account-deletion'
+      fullPath: '/api/public/account-deletion'
+      preLoaderRoute: typeof ApiPublicAccountDeletionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -299,6 +320,7 @@ const rootRouteChildren: RootRouteChildren = {
   RecoveryPlusRoute: RecoveryPlusRouteWithChildren,
   UbuntuTheFallRoute: UbuntuTheFallRoute,
   ZizieRoute: ZizieRoute,
+  ApiPublicAccountDeletionRoute: ApiPublicAccountDeletionRoute,
   ApiPublicWaitlistRoute: ApiPublicWaitlistRoute,
 }
 export const routeTree = rootRouteImport
