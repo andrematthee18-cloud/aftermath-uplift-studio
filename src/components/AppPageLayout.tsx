@@ -6,6 +6,8 @@ import { LogoMark } from "@/components/LogoMark";
 import { Logo3D } from "@/components/Logo3D";
 import { WaitlistForm } from "@/components/WaitlistForm";
 import { SocialLinks } from "@/components/SocialLinks";
+import { ReviewButton } from "@/components/ReviewButton";
+
 
 interface AppPageLayoutProps {
   name: string;
@@ -151,9 +153,13 @@ export function AppPageLayout({
             <LogoMark className="h-6 w-6" />
             <span className="font-mono uppercase tracking-[0.25em]">© {new Date().getFullYear()} Aftermath Studio</span>
           </div>
-          <SocialLinks />
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <SocialLinks />
+            <ReviewButton />
+          </div>
         </div>
       </footer>
+
     </main>
   );
 }

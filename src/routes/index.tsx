@@ -3,10 +3,12 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Activity, Heart, Skull, Mail, ArrowUpRight, MapPin, Wallet } from "lucide-react";
 import { SocialLinks } from "@/components/SocialLinks";
+import { ReviewButton } from "@/components/ReviewButton";
 import { Logo3D } from "@/components/Logo3D";
 import { LogoMark } from "@/components/LogoMark";
 import { AppCard } from "@/components/AppCard";
 import { ContactForm } from "@/components/ContactForm";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -237,10 +239,14 @@ function Home() {
             <LogoMark className="h-6 w-6" />
             <span className="font-mono uppercase tracking-[0.25em]">© {new Date().getFullYear()} Aftermath Studio</span>
           </div>
-          <SocialLinks />
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <SocialLinks />
+            <ReviewButton />
+          </div>
           <span className="font-mono uppercase tracking-[0.25em]">Made in South Africa 🇿🇦</span>
         </div>
       </footer>
+
 
       <ContactForm open={contactOpen} onOpenChange={setContactOpen} />
     </main>
