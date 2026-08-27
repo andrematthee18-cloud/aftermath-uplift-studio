@@ -7,7 +7,7 @@ interface AppCardProps {
   name: string;
   tagline: string;
   description: string;
-  status: "launching" | "in-development" | "concept";
+  status: "launching" | "testing" | "in-development" | "concept";
   accent: string;
   icon: React.ReactNode;
   to?: string;
@@ -15,6 +15,7 @@ interface AppCardProps {
 
 const STATUS_LABEL: Record<AppCardProps["status"], string> = {
   launching: "Launching Soon",
+  testing: "Testing on Android",
   "in-development": "In Development",
   concept: "On the Horizon",
 };

@@ -29,10 +29,11 @@ function RecoveryPlusPage() {
     <AppPageLayout
       name="Recovery Plus"
       tagline="Recovery Beyond Sobriety."
-      status="Launching Soon"
+      status="Testing on Android"
       accent="oklch(0.7 0.18 35 / 0.6)"
       icon={<Heart className="h-7 w-7" />}
       waitlistProduct="Recovery Plus"
+      waitlistLabel="Apply for Testing Phase"
       intro={
         <>
           <p>
@@ -50,6 +51,9 @@ function RecoveryPlusPage() {
             Whether someone is recovering from substance abuse, gambling, pornography, alcohol, or
             other addictive behaviours, Recovery Plus provides practical tools that support long-term
             recovery through consistency rather than perfection.
+          </p>
+          <p className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-sm text-accent">
+            Now in testing on Android · Free to use
           </p>
         </>
       }

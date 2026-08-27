@@ -137,10 +137,10 @@ function Home() {
               index={0}
               name="Recovery Plus"
               tagline="Tracker · Accountability"
-              status="launching"
+              status="testing"
               accent="oklch(0.7 0.18 35 / 0.6)"
               icon={<Heart className="h-6 w-6" />}
-              description="A daily tracker built with recovering addicts in mind — sobriety streaks, accountability partners, and quiet check-ins that show up when willpower runs low."
+              description="Now in testing on Android. A free daily tracker built with recovering addicts in mind — sobriety streaks, accountability partners, and quiet check-ins that show up when willpower runs low."
               to="/recovery-plus"
             />
             <AppCard
