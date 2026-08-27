@@ -38,7 +38,7 @@ export function RecoveryPlusWaitlistForm() {
         style={{ backgroundColor: "#1A1A1A" }}
       >
         <p className="text-base text-white sm:text-lg">
-          You&apos;re on the list. We&apos;ll email you when Recovery Plus launches.
+          Application received. We&apos;ll email you with Android testing access details.
         </p>
       </div>
     );
@@ -50,10 +50,10 @@ export function RecoveryPlusWaitlistForm() {
       style={{ backgroundColor: "#1A1A1A" }}
     >
       <h3 className="text-xl font-semibold text-white">
-        Join the Recovery Plus Waitlist
+        Apply for the Recovery Plus Testing Phase
       </h3>
       <p className="mt-1 text-sm text-white/70">
-        Enter your email and we&apos;ll let you know as soon as we launch.
+        Recovery Plus is currently in testing on Android and is free to use. Enter your email to request early access.
       </p>
 
       <form onSubmit={handleSubmit} className="mt-6 space-y-4">
@@ -86,10 +86,10 @@ export function RecoveryPlusWaitlistForm() {
         >
           {status === "loading" ? (
             <>
-              <Loader2 className="h-4 w-4 animate-spin" /> Joining…
+              <Loader2 className="h-4 w-4 animate-spin" /> Applying…
             </>
           ) : (
-            "Join Waitlist"
+            "Apply for Testing Phase"
           )}
         </button>
       </form>
