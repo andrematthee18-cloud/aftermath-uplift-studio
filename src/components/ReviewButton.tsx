@@ -13,7 +13,7 @@ export function ReviewButton({ className = "" }: { className?: string }) {
         group inline-flex items-center gap-2 rounded-full
         bg-accent px-4 py-2 text-sm font-medium text-accent-foreground
         transition-all duration-300
-        hover:scale-[1.03] hover:shadow-[0_0_40px_-10px_hsl(var(--accent))]
+        hover:scale-[1.03] hover:shadow-[0_0_40px_-10px_oklch(0.7_0.18_35/0.5)]
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background
         ${className}
       `}
@@ -24,3 +24,4 @@ export function ReviewButton({ className = "" }: { className?: string }) {
     </a>
   );
 }
+
